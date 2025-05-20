@@ -375,7 +375,7 @@ export default function ClientesPage() {
       {/* Charts */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         {/* PieChart por tipo de arquivo */}
-        <Card className="bg-slate-100 p-4">
+        <Card className="bg-slate-300 p-4">
           <h3 className="text-lg font-semibold mb-2">Por Tipo de Arquivo</h3>
           {fileData.length > 0 ? (
             <ResponsiveContainer width="100%" height={250}>
@@ -409,7 +409,7 @@ export default function ClientesPage() {
         </Card>
 
         {/* BarChart por tipo de erro */}
-        <Card className="bg-slate-200 p-4">
+        <Card className="bg-slate-300 p-4">
           <h3 className="text-lg font-semibold mb-2">Por Tipo de Erro</h3>
           {errorData.length > 0 ? (
             <div className="max-h-60 overflow-y-auto space-y-2 pr-2">
