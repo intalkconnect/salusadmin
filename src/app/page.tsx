@@ -308,32 +308,36 @@ export default function ClientesPage() {
       </div>
 
       {/* Metrics cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
-        <Card className="bg-slate-200">
-          <CardContent>
-            <h3 className="text-lg font-semibold">Total Jobs</h3>
-            <p className="text-2xl text-slate-800">{metrics.total_jobs}</p>
-          </CardContent>
-        </Card>
-        <Card className="bg-slate-200">
-          <CardContent>
-            <h3 className="text-lg font-semibold">Sucessos</h3>
-            <p className="text-2xl text-slate-800">{metrics.sucessos}</p>
-          </CardContent>
-        </Card>
-        <Card className="bg-slate-200">
-          <CardContent>
-            <h3 className="text-lg font-semibold">Falhas</h3>
-            <p className="text-2xl text-slate-800">{metrics.falhas}</p>
-          </CardContent>
-        </Card>
-        <Card className="bg-slate-200">
-          <CardContent>
-            <h3 className="text-lg font-semibold">Instâncias</h3>
-            <p className="text-2xl text-slate-800">{clientes.length}</p>
-          </CardContent>
-        </Card>
-      </div>
+     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
+  <Card className="bg-indigo-100">
+    <CardContent>
+      <h3 className="text-lg font-semibold text-indigo-800">Total Jobs</h3>
+      <p className="text-3xl font-bold text-indigo-900">{metrics.total_jobs}</p>
+    </CardContent>
+  </Card>
+
+  <Card className="bg-green-100">
+    <CardContent>
+      <h3 className="text-lg font-semibold text-green-800">Sucessos</h3>
+      <p className="text-3xl font-bold text-green-900">{metrics.sucessos}</p>
+    </CardContent>
+  </Card>
+
+  <Card className="bg-rose-100">
+    <CardContent>
+      <h3 className="text-lg font-semibold text-rose-800">Falhas</h3>
+      <p className="text-3xl font-bold text-rose-900">{metrics.falhas}</p>
+    </CardContent>
+  </Card>
+
+  <Card className="bg-sky-100">
+    <CardContent>
+      <h3 className="text-lg font-semibold text-sky-800">Instâncias</h3>
+      <p className="text-3xl font-bold text-sky-900">{clientes.length}</p>
+    </CardContent>
+  </Card>
+</div>
+
 
       {/* Charts */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
