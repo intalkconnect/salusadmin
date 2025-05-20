@@ -11,7 +11,18 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { Copy, RefreshCw, Plus, Trash2, Edit2, RotateCcw } from "lucide-react";
+import {
+  Copy,
+  RefreshCw,
+  Plus,
+  Trash2,
+  Edit2,
+  RotateCcw,
+  Briefcase,
+  CheckCircle,
+  XCircle,
+  Server,
+} from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import {
   Dialog,
@@ -308,36 +319,57 @@ export default function ClientesPage() {
       </div>
 
       {/* Metrics cards */}
-     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
-  <Card className="bg-indigo-100">
-    <CardContent>
-      <h3 className="text-lg font-semibold text-indigo-800">Total Jobs</h3>
-      <p className="text-3xl font-bold text-indigo-900">{metrics.total_jobs}</p>
-    </CardContent>
-  </Card>
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
+        <Card className="bg-indigo-100">
+          <CardContent className="flex items-center gap-4 p-4">
+            <Briefcase size={28} className="text-indigo-600" />
+            <div>
+              <h3 className="text-lg font-semibold text-indigo-800">
+                Total Jobs
+              </h3>
+              <p className="text-3xl font-bold text-indigo-900">
+                {metrics.total_jobs}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
 
-  <Card className="bg-green-100">
-    <CardContent>
-      <h3 className="text-lg font-semibold text-green-800">Sucessos</h3>
-      <p className="text-3xl font-bold text-green-900">{metrics.sucessos}</p>
-    </CardContent>
-  </Card>
+        <Card className="bg-green-100">
+          <CardContent className="flex items-center gap-4 p-4">
+            <CheckCircle size={28} className="text-green-600" />
+            <div>
+              <h3 className="text-lg font-semibold text-green-800">Sucessos</h3>
+              <p className="text-3xl font-bold text-green-900">
+                {metrics.sucessos}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
 
-  <Card className="bg-rose-100">
-    <CardContent>
-      <h3 className="text-lg font-semibold text-rose-800">Falhas</h3>
-      <p className="text-3xl font-bold text-rose-900">{metrics.falhas}</p>
-    </CardContent>
-  </Card>
+        <Card className="bg-rose-100">
+          <CardContent className="flex items-center gap-4 p-4">
+            <XCircle size={28} className="text-rose-600" />
+            <div>
+              <h3 className="text-lg font-semibold text-rose-800">Falhas</h3>
+              <p className="text-3xl font-bold text-rose-900">
+                {metrics.falhas}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
 
-  <Card className="bg-sky-100">
-    <CardContent>
-      <h3 className="text-lg font-semibold text-sky-800">Instâncias</h3>
-      <p className="text-3xl font-bold text-sky-900">{clientes.length}</p>
-    </CardContent>
-  </Card>
-</div>
-
+        <Card className="bg-sky-100">
+          <CardContent className="flex items-center gap-4 p-4">
+            <Server size={28} className="text-sky-600" />
+            <div>
+              <h3 className="text-lg font-semibold text-sky-800">Instâncias</h3>
+              <p className="text-3xl font-bold text-sky-900">
+                {clientes.length}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Charts */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
