@@ -373,7 +373,7 @@ export default function ClientesPage() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 shadow-md">
         {/* PieChart por tipo de arquivo */}
         <Card className="bg-slate-100 p-4">
           <h3 className="text-lg font-semibold mb-2">Por Tipo de Arquivo</h3>
@@ -409,7 +409,7 @@ export default function ClientesPage() {
         </Card>
 
         {/* BarChart por tipo de erro */}
-        <Card className="bg-slate-100 p-4">
+        <Card className="bg-slate-100 p-4 shadow-md">
           <h3 className="text-lg font-semibold mb-2">Por Tipo de Erro</h3>
           {errorData.length > 0 ? (
             <div className="max-h-60 overflow-y-auto space-y-2 pr-2">
