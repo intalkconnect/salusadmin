@@ -276,7 +276,7 @@ export default function ClientesPage() {
                 </div>
               </div>
               <DialogFooter>
-                <Button onClick={handleSubmit} variant="primary">
+                <Button onClick={handleSubmit} variant="default">
                   {modalData.id ? "Salvar" : "Criar"}
                 </Button>
               </DialogFooter>
