@@ -31,6 +31,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import toast from "react-hot-toast";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
@@ -130,11 +131,11 @@ export default function ClientesPage() {
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${API_KEY}` },
         body: JSON.stringify({ api_key: newKey }),
       });
-      alert(`Nova API Key: ${newKey}`);
+      toast.success(`Nova API Key: ${newKey}`);
       fetchClients();
     } catch (err) {
       console.error(err);
-      alert("Erro ao regenerar API Key");
+      toast.error("Erro ao regenerar API Key");
     }
   };
 
@@ -373,6 +374,7 @@ export default function ClientesPage() {
                       size="icon"
                       title="Copiar API Key"
                       onClick={() => navigator.clipboard.writeText(c.api_key)}
+                      toast.success("Copiado para a área de transferência");
                     >
                       <Copy size={16} />
                     </Button>
@@ -390,7 +392,7 @@ export default function ClientesPage() {
                           },
                           body: JSON.stringify({ api_key: newKey }),
                         }).then(() => {
-                          alert(`Nova API Key: ${newKey}`);
+                          toast.success(`Nova API Key: ${newKey}`);
                           fetchClients();
                         });
                       }}
