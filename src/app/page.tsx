@@ -88,7 +88,7 @@ export default function ClientesPage() {
   const fetchClients = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_BASE}/api/clientes`, {
+      const res = await fetch(`${API_BASE}/clientes`, {
         headers: { "X-API-Key": API_KEY },
       });
       setClientes(await res.json());
@@ -101,7 +101,7 @@ export default function ClientesPage() {
 
   const fetchMetrics = async () => {
     try {
-      const res = await fetch(`${API_BASE}/api/clientes/metrics`, {
+      const res = await fetch(`${API_BASE}/clientes/metrics`, {
         headers: { "X-API-Key": API_KEY },
       });
       setMetrics(await res.json());
@@ -112,7 +112,7 @@ export default function ClientesPage() {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Deseja excluir?")) return;
-    await fetch(`${API_BASE}/api/clientes/${id}`, {
+    await fetch(`${API_BASE}/clientes/${id}`, {
       method: "DELETE",
       headers: { "X-API-Key": API_KEY },
     });
@@ -125,7 +125,7 @@ export default function ClientesPage() {
     const newKey = crypto.randomUUID();
     try {
       // Atualiza no banco via PATCH
-      await fetch(`${API_BASE}/api/clientes/${id}`, {
+      await fetch(`${API_BASE}/clientes/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json", "X-API-Key": API_KEY },
         body: JSON.stringify({ api_key: newKey }),
@@ -156,8 +156,8 @@ export default function ClientesPage() {
   const handleSubmit = async () => {
     const method = modalData.id ? "PATCH" : "POST";
     const url = modalData.id
-      ? `${API_BASE}/api/clientes/${modalData.id}`
-      : `${API_BASE}/api/clientes`;
+      ? `${API_BASE}/clientes/${modalData.id}`
+      : `${API_BASE}/clientes`;
     await fetch(url, {
       method,
       headers: { "Content-Type": "application/json", "X-API-Key": API_KEY },
