@@ -90,7 +90,7 @@ export default function ClientesPage() {
     setLoading(true);
     try {
       const res = await fetch(`${API_BASE}/clientes`, {
-        headers: {"Authorization": `Bearer ${API_KEY}`},
+        headers: { Authorization: `Bearer ${API_KEY}` },
       });
       setClientes(await res.json());
     } catch (err) {
@@ -103,7 +103,7 @@ export default function ClientesPage() {
   const fetchMetrics = async () => {
     try {
       const res = await fetch(`${API_BASE}/clientes/metrics`, {
-        headers: { "Authorization": `Bearer ${API_KEY}` },
+        headers: { Authorization: `Bearer ${API_KEY}` },
       });
       setMetrics(await res.json());
     } catch (err) {
@@ -115,7 +115,7 @@ export default function ClientesPage() {
     if (!confirm("Deseja excluir?")) return;
     await fetch(`${API_BASE}/clientes/${id}`, {
       method: "DELETE",
-      headers: { "Authorization": `Bearer ${API_KEY}` },
+      headers: { Authorization: `Bearer ${API_KEY}` },
     });
     fetchClients();
     fetchMetrics();
@@ -128,7 +128,10 @@ export default function ClientesPage() {
       // Atualiza no banco via PATCH
       await fetch(`${API_BASE}/clientes/${id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${API_KEY}` },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${API_KEY}`,
+        },
         body: JSON.stringify({ api_key: newKey }),
       });
       toast.success(`Nova API Key: ${newKey}`);
@@ -161,7 +164,10 @@ export default function ClientesPage() {
       : `${API_BASE}/clientes`;
     await fetch(url, {
       method,
-      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${API_KEY}` },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+      },
       body: JSON.stringify({ nome, openai_key: openaiKey, api_key: apiKey }),
     });
     setOpen(false);
@@ -373,11 +379,14 @@ export default function ClientesPage() {
                       variant="ghost"
                       size="icon"
                       title="Copiar API Key"
-                      onClick={() => navigator.clipboard.writeText(c.api_key)}
-                      toast.success("Copiado para a área de transferência");
+                      onClick={() => {
+                        navigator.clipboard.writeText(c.api_key);
+                        toast.success("Copiado para a área de transferência");
+                      }}
                     >
                       <Copy size={16} />
                     </Button>
+
                     <Button
                       variant="ghost"
                       size="icon"
@@ -388,7 +397,7 @@ export default function ClientesPage() {
                           method: "PATCH",
                           headers: {
                             "Content-Type": "application/json",
-                            "Authorization": `Bearer ${API_KEY}`,
+                            Authorization: `Bearer ${API_KEY}`,
                           },
                           body: JSON.stringify({ api_key: newKey }),
                         }).then(() => {
@@ -415,7 +424,7 @@ export default function ClientesPage() {
                         if (confirm("Deseja excluir?")) {
                           fetch(`${API_BASE}/clientes/${c.id}`, {
                             method: "DELETE",
-                            headers: { "Authorization": `Bearer ${API_KEY}` },
+                            headers: { Authorization: `Bearer ${API_KEY}` },
                           }).then(() => {
                             fetchClients();
                             fetchMetrics();
@@ -475,7 +484,7 @@ export default function ClientesPage() {
                         method: "PATCH",
                         headers: {
                           "Content-Type": "application/json",
-                          "Authorization": `Bearer ${API_KEY}`,
+                          Authorization: `Bearer ${API_KEY}`,
                         },
                         body: JSON.stringify({ ativo: checked }),
                       });
