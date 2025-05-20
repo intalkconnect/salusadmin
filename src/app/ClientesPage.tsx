@@ -11,12 +11,21 @@ import {
 } from "@/components/ui/select";
 import { Copy, Eye, RefreshCw, Plus } from "lucide-react";
 
-// Defina sua chave de API no .env: REACT_APP_API_KEY=teste
+type Cliente = {
+  id: string;
+  nome: string;
+  api_key: string;
+  uso: number;
+  uso_atual: number;
+  uso_anterior: number;
+  ativo: boolean;
+};
+
 const API_KEY = process.env.REACT_APP_API_KEY || "teste";
 const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:8001";
 
 export default function ClientesPage() {
-  const [clientes, setClientes] = useState<any[]>([]);
+  const [clientes, setClientes] = useState<Cliente[]>([]);
   const [search, setSearch] = useState<string>("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [loading, setLoading] = useState<boolean>(true);
@@ -34,7 +43,7 @@ export default function ClientesPage() {
           accept: "application/json",
         },
       });
-      const data = await res.json();
+      const data: Cliente[] = await res.json();
       setClientes(data);
     } catch (err) {
       console.error(err);
@@ -64,10 +73,12 @@ export default function ClientesPage() {
           <Input
             placeholder="Search"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setSearch(e.target.value)
+            }
             className="bg-gray-800 placeholder-gray-400"
           />
-          <Select onValueChange={(value) => setStatusFilter(value)}>
+          <Select onValueChange={(value: string) => setStatusFilter(value)}>
             <SelectTrigger className="w-36 bg-gray-800">
               <SelectValue placeholder="Status" />
             </SelectTrigger>
