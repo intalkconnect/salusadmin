@@ -373,9 +373,9 @@ export default function ClientesPage() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         {/* PieChart por tipo de arquivo */}
-        <Card className="bg-slate-100 p-4">
+        <Card className="bg-slate-100 p-4 shadow-xl hover:shadow-2xl transition-shadow duration-300">
           <h3 className="text-lg font-semibold mb-2">Por Tipo de Arquivo</h3>
           {fileData.length > 0 ? (
             <ResponsiveContainer width="100%" height={250}>
