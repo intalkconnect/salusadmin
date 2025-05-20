@@ -403,7 +403,7 @@ export default function ClientesPage() {
                       variant="ghost"
                       size="icon"
                       title="Editar"
-                      onClick={() => handleOpenModal(c)}
+                      onClick={() => handleOpen(c)}
                     >
                       <Edit2 size={16} />
                     </Button>
