@@ -321,7 +321,7 @@ export default function ClientesPage() {
 
       {/* Metrics cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
-        <Card className="bg-indigo-300">
+        <Card className="bg-indigo-300 shadow-xl hover:shadow-2xl transition-shadow duration-300">
           <CardContent className="flex items-center gap-4 p-4">
             <Briefcase size={28} className="text-indigo-600" />
             <div>
@@ -335,7 +335,7 @@ export default function ClientesPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-green-300">
+        <Card className="bg-green-300 shadow-xl hover:shadow-2xl transition-shadow duration-300">
           <CardContent className="flex items-center gap-4 p-4">
             <CheckCircle size={28} className="text-green-600" />
             <div>
@@ -347,7 +347,7 @@ export default function ClientesPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-rose-300">
+        <Card className="bg-rose-300 shadow-xl hover:shadow-2xl transition-shadow duration-300">
           <CardContent className="flex items-center gap-4 p-4">
             <XCircle size={28} className="text-rose-600" />
             <div>
@@ -359,7 +359,7 @@ export default function ClientesPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-sky-300">
+        <Card className="bg-sky-300 shadow-xl hover:shadow-2xl transition-shadow duration-300">
           <CardContent className="flex items-center gap-4 p-4">
             <Server size={28} className="text-sky-600" />
             <div>
@@ -373,7 +373,7 @@ export default function ClientesPage() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 shadow-md">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 shadow-xl hover:shadow-2xl transition-shadow duration-300">
         {/* PieChart por tipo de arquivo */}
         <Card className="bg-slate-100 p-4">
           <h3 className="text-lg font-semibold mb-2">Por Tipo de Arquivo</h3>
@@ -409,7 +409,7 @@ export default function ClientesPage() {
         </Card>
 
         {/* BarChart por tipo de erro */}
-        <Card className="bg-slate-100 p-4 shadow-md">
+        <Card className="bg-slate-100 p-4 shadow-xl hover:shadow-2xl transition-shadow duration-300">
           <h3 className="text-lg font-semibold mb-2">Por Tipo de Erro</h3>
           {errorData.length > 0 ? (
             <div className="max-h-60 overflow-y-auto space-y-2 pr-2">
@@ -439,7 +439,7 @@ export default function ClientesPage() {
           paged.map((c) => (
             <Card
               key={c.id}
-              className="bg-white border border-slate-200 shadow-md"
+              className="bg-white border border-slate-200 shadow-xl hover:shadow-2xl transition-shadow duration-300"
             >
               <CardContent className="p-4">
                 <div className="flex justify-between items-start mb-2">
