@@ -382,7 +382,7 @@ export default function ClientesPage() {
                       title="Resetar API Key"
                       onClick={() => {
                         const newKey = crypto.randomUUID();
-                        fetch(`${API_BASE}/api/clientes/${c.id}`, {
+                        fetch(`${API_BASE}/clientes/${c.id}`, {
                           method: "PATCH",
                           headers: {
                             "Content-Type": "application/json",
@@ -413,7 +413,7 @@ export default function ClientesPage() {
                       title="Excluir"
                       onClick={() => {
                         if (confirm("Deseja excluir?")) {
-                          fetch(`${API_BASE}/api/clientes/${c.id}`, {
+                          fetch(`${API_BASE}/clientes/${c.id}`, {
                             method: "DELETE",
                             headers: { "X-API-Key": API_KEY },
                           }).then(() => {
@@ -471,7 +471,7 @@ export default function ClientesPage() {
                   <Switch
                     checked={c.ativo}
                     onCheckedChange={async (checked: boolean) => {
-                      await fetch(`${API_BASE}/api/clientes/${c.id}`, {
+                      await fetch(`${API_BASE}/clientes/${c.id}`, {
                         method: "PATCH",
                         headers: {
                           "Content-Type": "application/json",
