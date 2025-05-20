@@ -62,8 +62,14 @@ type Cliente = {
 };
 
 const COLORS = [
-  "#6366f1", "#10b981", "#f59e0b", "#ef4444",
-  "#14b8a6", "#8b5cf6", "#f43f5e", "#3b82f6",
+  "#6366f1",
+  "#10b981",
+  "#f59e0b",
+  "#ef4444",
+  "#14b8a6",
+  "#8b5cf6",
+  "#f43f5e",
+  "#3b82f6",
 ];
 
 export default function ClientesPage() {
@@ -369,17 +375,19 @@ export default function ClientesPage() {
         <Card className="bg-slate-100 p-4">
           <h3 className="text-lg font-semibold mb-2">Por Tipo de Erro</h3>
           {errorData.length > 0 ? (
-            <ResponsiveContainer width="100%" height={250}>
-              <BarChart data={errorData} layout="vertical">
-                <XAxis type="number" />
-                <YAxis dataKey="name" type="category" width={120} />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="value" fill="#ef4444">
-                  <LabelList dataKey="value" position="right" />
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="max-h-60 overflow-y-auto space-y-2 pr-2">
+              {errorData.map((err, i) => (
+                <div
+                  key={i}
+                  className="flex justify-between items-center bg-white p-2 rounded shadow-sm border border-slate-200"
+                >
+                  <span className="text-sm text-slate-700">{err.name}</span>
+                  <span className="text-sm font-semibold text-rose-600">
+                    {err.value}
+                  </span>
+                </div>
+              ))}
+            </div>
           ) : (
             <p className="text-sm text-slate-600">Nenhum erro</p>
           )}
