@@ -58,7 +58,7 @@ type Cliente = {
 
 export default function ClientesPage() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
-  const [modalData, setModalData] = useState<Partial<Cliente>>({});
+  const [Data, setData] = useState<Partial<Cliente>>({});
 
   const [metrics, setMetrics] = useState<Metrics>({
     total_jobs: 0,
@@ -138,14 +138,14 @@ export default function ClientesPage() {
     }
   };
 
-  const handleOpenModal = (c?: Cliente) => {
+  const handleOpen = (c?: Cliente) => {
     if (c) {
-      setModalData(c);
+      setData(c);
       setNome(c.nome);
       setOpenaiKey(c.openai_key);
       setApiKey(c.api_key);
     } else {
-      setModalData({});
+      setData({});
       setNome("");
       setOpenaiKey("");
       setApiKey("");
@@ -154,9 +154,9 @@ export default function ClientesPage() {
   };
 
   const handleSubmit = async () => {
-    const method = modalData.id ? "PATCH" : "POST";
-    const url = modalData.id
-      ? `${API_BASE}/clientes/${modalData.id}`
+    const method = Data.id ? "PATCH" : "POST";
+    const url = Data.id
+      ? `${API_BASE}/clientes/${Data.id}`
       : `${API_BASE}/clientes`;
     await fetch(url, {
       method,
@@ -240,10 +240,10 @@ export default function ClientesPage() {
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>
-                  {modalData.id ? "Editar Instância" : "Nova Instância"}
+                  {Data.id ? "Editar Instância" : "Nova Instância"}
                 </DialogTitle>
                 <DialogDescription>
-                  {modalData.id
+                  {Data.id
                     ? "Atualize os dados da instância"
                     : "Preencha os campos para criar uma nova instância"}
                 </DialogDescription>
@@ -277,7 +277,7 @@ export default function ClientesPage() {
               </div>
               <DialogFooter>
                 <Button onClick={handleSubmit} variant="default">
-                  {modalData.id ? "Salvar" : "Criar"}
+                  {Data.id ? "Salvar" : "Criar"}
                 </Button>
               </DialogFooter>
             </DialogContent>
@@ -401,9 +401,7 @@ export default function ClientesPage() {
                       variant="ghost"
                       size="icon"
                       title="Editar"
-                      onClick={() => {
-                        /* open modal omitted */
-                      }}
+                      onClick={() => handleOpenModal(c)}
                     >
                       <Edit2 size={16} />
                     </Button>
