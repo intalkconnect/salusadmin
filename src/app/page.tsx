@@ -23,6 +23,9 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import {
+  PieChart,
+  Pie,
+  Cell,
   BarChart,
   Bar,
   XAxis,
@@ -30,6 +33,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   Legend,
+  LabelList,
 } from "recharts";
 import toast from "react-hot-toast";
 
@@ -56,6 +60,11 @@ type Cliente = {
   uso_anterior: number;
   ativo: boolean;
 };
+
+const COLORS = [
+  "#6366f1", "#10b981", "#f59e0b", "#ef4444",
+  "#14b8a6", "#8b5cf6", "#f43f5e", "#3b82f6",
+];
 
 export default function ClientesPage() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
@@ -322,32 +331,53 @@ export default function ClientesPage() {
 
       {/* Charts */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        {/* PieChart por tipo de arquivo */}
         <Card className="bg-slate-100 p-4">
           <h3 className="text-lg font-semibold mb-2">Por Tipo de Arquivo</h3>
           {fileData.length > 0 ? (
-            <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={fileData}>
-                <XAxis dataKey="name" />
-                <YAxis />
+            <ResponsiveContainer width="100%" height={250}>
+              <PieChart>
+                <Pie
+                  data={fileData}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={80}
+                  label={({ name, percent }) =>
+                    `${name} (${(percent * 100).toFixed(0)}%)`
+                  }
+                >
+                  {fileData.map((_, index) => (
+                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
                 <Tooltip />
-                <Legend />
-                <Bar dataKey="value" />
-              </BarChart>
+                <Legend
+                  layout="vertical"
+                  verticalAlign="middle"
+                  align="right"
+                />
+              </PieChart>
             </ResponsiveContainer>
           ) : (
             <p className="text-sm text-slate-600">Nenhum registro</p>
           )}
         </Card>
+
+        {/* BarChart por tipo de erro */}
         <Card className="bg-slate-100 p-4">
           <h3 className="text-lg font-semibold mb-2">Por Tipo de Erro</h3>
           {errorData.length > 0 ? (
-            <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={errorData}>
-                <XAxis dataKey="name" />
-                <YAxis />
+            <ResponsiveContainer width="100%" height={250}>
+              <BarChart data={errorData} layout="vertical">
+                <XAxis type="number" />
+                <YAxis dataKey="name" type="category" width={120} />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="value" />
+                <Bar dataKey="value" fill="#ef4444">
+                  <LabelList dataKey="value" position="right" />
+                </Bar>
               </BarChart>
             </ResponsiveContainer>
           ) : (
