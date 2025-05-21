@@ -272,49 +272,54 @@ export default function ClientesPage() {
               </Button>
             </DialogTrigger>
             <DialogContent>
-              <DialogHeader>
-                <DialogTitle>
-                  {Data.id ? "Editar Instância" : "Nova Instância"}
-                </DialogTitle>
-                <DialogDescription>
-                  {Data.id
-                    ? "Atualize os dados da instância"
-                    : "Preencha os campos para criar uma nova instância"}
-                </DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <label className="text-right">Nome</label>
-                  <Input
-                    className="col-span-3"
-                    value={nome}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setNome(e.target.value)
-                    }
-                  />
-                  <Input
-                    type="password"
-                    className="col-span-3"
-                    value={openaiKey}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setOpenaiKey(e.target.value)
-                    }
-                  />
-                  <Input
-                    className="col-span-3"
-                    value={apiKey}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setApiKey(e.target.value)
-                    }
-                  />
-                </div>
-              </div>
-              <DialogFooter>
-                <Button onClick={handleSubmit} variant="default">
-                  {Data.id ? "Salvar" : "Criar"}
-                </Button>
-              </DialogFooter>
-            </DialogContent>
+  <DialogHeader>
+    <DialogTitle>
+      {Data.id ? "Editar Instância" : "Nova Instância"}
+    </DialogTitle>
+    <DialogDescription>
+      {Data.id
+        ? "Atualize os dados da instância"
+        : "Preencha os campos para criar uma nova instância"}
+    </DialogDescription>
+  </DialogHeader>
+
+  <div className="grid gap-4 py-4">
+    <div className="grid grid-cols-4 items-center gap-4">
+      <label className="text-right">Nome</label>
+      <Input
+        className="col-span-3"
+        value={nome}
+        onChange={(e) => setNome(e.target.value)}
+      />
+    </div>
+
+    <div className="grid grid-cols-4 items-center gap-4">
+      <label className="text-right">OpenAI Key</label>
+      <Input
+        type="password"
+        className="col-span-3"
+        value={openaiKey}
+        onChange={(e) => setOpenaiKey(e.target.value)}
+      />
+    </div>
+
+    <div className="grid grid-cols-4 items-center gap-4">
+      <label className="text-right">API Key</label>
+      <Input
+        className="col-span-3"
+        value={apiKey}
+        onChange={(e) => setApiKey(e.target.value)}
+      />
+    </div>
+  </div>
+
+  <DialogFooter>
+    <Button onClick={handleSubmit} variant="default">
+      {Data.id ? "Salvar" : "Criar"}
+    </Button>
+  </DialogFooter>
+</DialogContent>
+
           </Dialog>
         </div>
       </div>
