@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 import { RefreshCw, Plus } from "lucide-react";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 
-import MetricsCards from "./components/MetricsCards";
-import Charts from "./components/Charts";
-import InstanceCard from "./components/InstanceCard";
-import InstanceFormDialog from "./components/InstanceFormDialog";
+import MetricsCards from "../components/MetricsCards";
+import Charts from "../components/Charts";
+import InstanceCard from "../components/InstanceCard";
+import InstanceFormDialog from "../components/InstanceFormDialog";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
