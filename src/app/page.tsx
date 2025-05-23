@@ -4,18 +4,24 @@ import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { RefreshCw, Plus } from "lucide-react";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 
 import MetricsCards from "../components/MetricsCards";
 import Charts from "../components/Charts";
 import InstanceCard from "../components/InstanceCard";
 import InstanceFormDialog from "../components/InstanceFormDialog";
 
+import { Cliente, Metrics } from "./lib/types";
+
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 const ITEMS_PER_PAGE = 6;
-
-import { Cliente, Metrics } from "./lib/types";
 
 export default function ClientesPage() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
@@ -34,18 +40,17 @@ export default function ClientesPage() {
   const totalPages = Math.ceil(clientes.length / ITEMS_PER_PAGE);
 
   const [open, setOpen] = useState(false);
-const [selectedCliente, setSelectedCliente] = useState<Cliente | undefined>(undefined);
+  const [selectedCliente, setSelectedCliente] = useState<Cliente | undefined>(undefined);
+
   useEffect(() => {
     fetchClients();
     fetchMetrics();
   }, []);
 
-
-const handleOpen = (cliente?: Cliente) => {
-  setSelectedCliente(cliente);
-  setOpen(true);
-};
-
+  const handleOpen = (cliente?: Cliente) => {
+    setSelectedCliente(cliente);
+    setOpen(true);
+  };
 
   const fetchClients = async () => {
     const res = await fetch(`${API_BASE}/clientes`, {
@@ -78,8 +83,9 @@ const handleOpen = (cliente?: Cliente) => {
   );
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+    <div className="max-w-7xl mx-auto p-6 h-[calc(100vh-40px)] flex flex-col gap-6">
+      {/* Filtros e Ações */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         <h1 className="text-2xl font-semibold">Instâncias</h1>
         <div className="flex flex-col md:flex-row gap-2">
           <Input
@@ -97,49 +103,55 @@ const handleOpen = (cliente?: Cliente) => {
               <SelectItem value="inactive">Inactive</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline" onClick={() => {
-            fetchClients();
-            fetchMetrics();
-          }}>
+          <Button
+            variant="outline"
+            onClick={() => {
+              fetchClients();
+              fetchMetrics();
+            }}
+          >
             <RefreshCw size={18} />
           </Button>
           <InstanceFormDialog
-  open={open}
-  setOpen={setOpen}
-  refresh={() => {
-    fetchClients();
-    fetchMetrics();
-  }}
-  data={selectedCliente}
-/>
-
-<Button onClick={() => handleOpen()}>
-  <Plus size={18} className="mr-1" /> Instância+
-</Button>
+            open={open}
+            setOpen={setOpen}
+            refresh={() => {
+              fetchClients();
+              fetchMetrics();
+            }}
+            data={selectedCliente}
+          />
+          <Button onClick={() => handleOpen()}>
+            <Plus size={18} className="mr-1" /> Instância+
+          </Button>
         </div>
       </div>
 
-      <MetricsCards metrics={metrics} totalClientes={clientes.length} />
+      {/* Dashboard - fixo no topo */}
+      <div className="flex flex-col gap-4">
+        <MetricsCards metrics={metrics} totalClientes={clientes.length} />
+        <Charts metrics={metrics} />
+      </div>
 
-      <Charts metrics={metrics} />
+      {/* Área de Instâncias com scroll */}
+      <div className="flex-1 overflow-auto border rounded-xl p-4 bg-background">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {paged.map((c) => (
+            <InstanceCard
+              key={c.id}
+              cliente={c}
+              refresh={() => {
+                fetchClients();
+                fetchMetrics();
+              }}
+              onEdit={() => handleOpen(c)}
+            />
+          ))}
+        </div>
+      </div>
 
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-  {paged.map((c) => (
-    <InstanceCard
-      key={c.id}
-      cliente={c}
-      refresh={() => {
-        fetchClients();
-        fetchMetrics();
-      }}
-      onEdit={() => handleOpen(c)}
-    />
-  ))}
-</div>
-
-
-
-      <div className="flex items-center justify-center gap-4 mt-6">
+      {/* Paginação */}
+      <div className="flex items-center justify-center gap-4">
         <Button
           variant="outline"
           onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
@@ -147,7 +159,9 @@ const handleOpen = (cliente?: Cliente) => {
         >
           Anterior
         </Button>
-        <span>Page {currentPage} of {totalPages}</span>
+        <span>
+          Página {currentPage} de {totalPages}
+        </span>
         <Button
           variant="outline"
           onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
