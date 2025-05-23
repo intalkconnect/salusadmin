@@ -15,7 +15,7 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 const ITEMS_PER_PAGE = 6;
 
-import { Cliente, Metrics } from "../app/lib/types";
+import { Cliente, Metrics } from "./lib/types";
 
 export default function ClientesPage() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
