@@ -34,7 +34,7 @@ const Charts = ({ metrics }: Props) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       {/* Gráfico por tipo de arquivo */}
-      <Card className="bg-white p-4 shadow-md hover:shadow-lg rounded-2xl transition">
+      <Card className="bg-card p-4 shadow-md hover:shadow-lg rounded-2xl transition">
         <h3 className="text-lg font-semibold mb-3">Por Tipo de Arquivo</h3>
         {fileData.length > 0 ? (
           <ResponsiveContainer width="100%" height={200}>
@@ -69,7 +69,7 @@ const Charts = ({ metrics }: Props) => {
       </Card>
 
       {/* Lista de erros mais compacta */}
-      <Card className="bg-white p-4 shadow-md hover:shadow-lg rounded-2xl transition">
+      <Card className="bg-card p-4 shadow-md hover:shadow-lg rounded-2xl transition">
         <h3 className="text-lg font-semibold mb-3">Por Tipo de Erro</h3>
         {errorData.length > 0 ? (
           <div className="space-y-1">
