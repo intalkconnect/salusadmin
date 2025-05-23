@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
-import { Cliente } from "@/app/lib/types";
+import { Cliente } from "../app/lib/types";
 import { RefreshCw } from "lucide-react";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
