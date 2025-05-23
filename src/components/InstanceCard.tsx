@@ -57,7 +57,7 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
   };
 
   return (
-    <Card className="bg-white border border-slate-200 shadow-md hover:shadow-lg transition rounded-2xl">
+    <Card className="bg-card border border-slate-200 shadow-md hover:shadow-lg transition rounded-2xl">
   <CardContent className="p-4 space-y-4">
 
     {/* Header */}
