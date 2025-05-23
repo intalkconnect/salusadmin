@@ -15,7 +15,7 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 const ITEMS_PER_PAGE = 6;
 
-import { Cliente, Metrics } from "@/app/lib/types";
+import { Cliente, Metrics } from "../app/lib/types";
 
 export default function ClientesPage() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
@@ -34,11 +34,18 @@ export default function ClientesPage() {
   const totalPages = Math.ceil(clientes.length / ITEMS_PER_PAGE);
 
   const [open, setOpen] = useState(false);
-
+const [selectedCliente, setSelectedCliente] = useState<Cliente | undefined>(undefined);
   useEffect(() => {
     fetchClients();
     fetchMetrics();
   }, []);
+
+
+const handleOpen = (cliente?: Cliente) => {
+  setSelectedCliente(cliente);
+  setOpen(true);
+};
+
 
   const fetchClients = async () => {
     const res = await fetch(`${API_BASE}/clientes`, {
@@ -97,9 +104,9 @@ export default function ClientesPage() {
             <RefreshCw size={18} />
           </Button>
           <InstanceFormDialog open={open} setOpen={setOpen} refresh={fetchClients} />
-          <Button onClick={() => setOpen(true)}>
-            <Plus size={18} className="mr-1" /> Instância+
-          </Button>
+<Button onClick={() => handleOpen()}>
+  <Plus size={18} className="mr-1" /> Instância+
+</Button>
         </div>
       </div>
 
