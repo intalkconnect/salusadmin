@@ -103,7 +103,16 @@ const handleOpen = (cliente?: Cliente) => {
           }}>
             <RefreshCw size={18} />
           </Button>
-          <InstanceFormDialog open={open} setOpen={setOpen} refresh={fetchClients} />
+          <InstanceFormDialog
+  open={open}
+  setOpen={setOpen}
+  refresh={() => {
+    fetchClients();
+    fetchMetrics();
+  }}
+  data={selectedCliente}
+/>
+
 <Button onClick={() => handleOpen()}>
   <Plus size={18} className="mr-1" /> Instância+
 </Button>
@@ -116,14 +125,16 @@ const handleOpen = (cliente?: Cliente) => {
 
       <div className="space-y-4">
         {paged.map((c) => (
-          <InstanceCard
-            key={c.id}
-            cliente={c}
-            refresh={() => {
-              fetchClients();
-              fetchMetrics();
-            }}
-          />
+<InstanceCard
+  key={c.id}
+  cliente={c}
+  onEdit={() => handleOpen(c)}
+  refresh={() => {
+    fetchClients();
+    fetchMetrics();
+  }}
+/>
+
         ))}
       </div>
 
