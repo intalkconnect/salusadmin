@@ -60,7 +60,7 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <Card className="bg-card text-card-foreground border border-border rounded-xl shadow-md">
-        <CardContent className="p-4 flex flex-col gap-3">
+  <CardContent className="p-4 flex flex-col gap-3">
           <div className="flex justify-between items-center">
             <h3 className="font-semibold text-lg">{cliente.nome}</h3>
             <Switch
