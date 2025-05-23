@@ -67,7 +67,6 @@ type Cliente = {
   id: string;
   nome: string;
   api_key: string;
-  openai_key: string;
   uso: number;
   uso_atual: number;
   uso_anterior: number;
@@ -108,7 +107,6 @@ export default function ClientesPage() {
 
   const [open, setOpen] = useState(false);
   const [nome, setNome] = useState("");
-  const [openaiKey, setOpenaiKey] = useState("");
   const [apiKey, setApiKey] = useState("");
 
   useEffect(() => {
@@ -176,12 +174,10 @@ export default function ClientesPage() {
     if (c) {
       setData(c);
       setNome(c.nome);
-      setOpenaiKey(c.openai_key);
       setApiKey(c.api_key);
     } else {
       setData({});
       setNome("");
-      setOpenaiKey("");
       setApiKey("");
     }
     setOpen(true);
@@ -198,7 +194,7 @@ export default function ClientesPage() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${API_KEY}`,
       },
-      body: JSON.stringify({ nome, openai_key: openaiKey, api_key: apiKey }),
+      body: JSON.stringify({ nome, api_key: apiKey }),
     });
     setOpen(false);
     fetchClients();
@@ -293,16 +289,6 @@ export default function ClientesPage() {
         className="col-span-3"
         value={nome}
         onChange={(e) => setNome(e.target.value)}
-      />
-    </div>
-
-    <div className="grid grid-cols-4 items-center gap-4">
-      <label className="text-right">OpenAI Key</label>
-      <Input
-        type="password"
-        className="col-span-3"
-        value={openaiKey}
-        onChange={(e) => setOpenaiKey(e.target.value)}
       />
     </div>
 
@@ -541,12 +527,6 @@ export default function ClientesPage() {
                     <p className="text-base font-medium text-slate-900 truncate">
                       {c.nome}
                     </p>
-                  </div>
-                  <div>
-                    <label className="block text-xs text-slate-500">
-                      OpenAI Key
-                    </label>
-                    <p className="truncate">{maskedKey(c.openai_key)}</p>
                   </div>
                   <div>
                     <label className="block text-xs text-slate-500">
