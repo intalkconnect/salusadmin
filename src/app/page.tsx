@@ -60,6 +60,7 @@ type Metrics = {
   falhas: number;
   por_tipo_arquivo: Record<string, number>;
   por_tipo_erro: Record<string, number>;
+  tempo_medio_processamento_segundos: number;
 };
 
 type Cliente = {
@@ -95,6 +96,7 @@ export default function ClientesPage() {
     falhas: 0,
     por_tipo_arquivo: {},
     por_tipo_erro: {},
+    tempo_medio_processamento_segundos: 0,
   });
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
