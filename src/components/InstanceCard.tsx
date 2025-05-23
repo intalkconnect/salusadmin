@@ -13,9 +13,9 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 type Props = {
-  cliente: Cliente;
-  refresh: () => void;
-  onEdit: () => void;
+  cliente: Cliente,
+  refresh: () => void,
+  onEdit: () => void,
 };
 
 const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
@@ -58,48 +58,48 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <Card className="bg-card text-card-foreground border border-border rounded-xl shadow-md">
-  <CardContent className="p-4 flex flex-col gap-3">
-          <div className="flex justify-between items-center">
-            <h3 className="font-semibold text-lg">{cliente.nome}</h3>
-            <Switch
-              checked={cliente.ativo}
-              onCheckedChange={handleToggleStatus}
-            />
-          </div>
+    <Card className="bg-card text-card-foreground border border-border rounded-xl shadow-md">
+      <CardContent className="p-4 flex flex-col gap-3">
+        <div className="flex justify-between items-center">
+          <h3 className="font-semibold text-lg">{cliente.nome}</h3>
+          <Switch
+            checked={cliente.ativo}
+            onCheckedChange={handleToggleStatus}
+          />
+        </div>
 
-          <div className="flex justify-between items-center">
-            <div>
-              <p className="text-xs text-muted-foreground">API Key</p>
-              <p className="font-mono text-sm">•••••{cliente.api_key.slice(-6)}</p>
-            </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                navigator.clipboard.writeText(cliente.api_key);
-                toast.success("API Key copiada!");
-              }}
-            >
-              <Copy size={16} />
-            </Button>
+        <div className="flex justify-between items-center">
+          <div>
+            <p className="text-xs text-muted-foreground">API Key</p>
+            <p className="font-mono text-sm">
+              •••••{cliente.api_key.slice(-6)}
+            </p>
           </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => {
+              navigator.clipboard.writeText(cliente.api_key);
+              toast.success("API Key copiada!");
+            }}
+          >
+            <Copy size={16} />
+          </Button>
+        </div>
 
-          <div className="flex justify-end gap-2">
-            <Button variant="outline" size="icon" onClick={onEdit}>
-              <Edit2 size={16} />
-            </Button>
-            <Button variant="outline" size="icon" onClick={handleResetKey}>
-              <RotateCcw size={16} />
-            </Button>
-            <Button variant="destructive" size="icon" onClick={handleDelete}>
-              <Trash2 size={16} />
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+        <div className="flex justify-end gap-2">
+          <Button variant="outline" size="icon" onClick={onEdit}>
+            <Edit2 size={16} />
+          </Button>
+          <Button variant="outline" size="icon" onClick={handleResetKey}>
+            <RotateCcw size={16} />
+          </Button>
+          <Button variant="destructive" size="icon" onClick={handleDelete}>
+            <Trash2 size={16} />
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
