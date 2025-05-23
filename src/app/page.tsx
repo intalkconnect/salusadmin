@@ -85,10 +85,45 @@ export default function ClientesPage() {
   return (
     <div className="max-w-7xl mx-auto p-6 flex flex-col gap-8 h-screen">
   {/* Header + filtros */}
-  <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+<div className="flex flex-col md:flex-row items-center justify-between gap-4">
     <h1 className="text-3xl font-bold">Salus Admin</h1>
     <div className="flex flex-col md:flex-row gap-2">
-      {/* ... Filtros e botões ... */}
+      <Input
+        placeholder="Search"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      <Select onValueChange={(v: string) => setStatusFilter(v)}>
+        <SelectTrigger className="w-36">
+          <SelectValue placeholder="Status" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All</SelectItem>
+          <SelectItem value="active">Active</SelectItem>
+          <SelectItem value="inactive">Inactive</SelectItem>
+        </SelectContent>
+      </Select>
+      <Button
+        variant="outline"
+        onClick={() => {
+          fetchClients();
+          fetchMetrics();
+        }}
+      >
+        <RefreshCw size={18} />
+      </Button>
+      <InstanceFormDialog
+        open={open}
+        setOpen={setOpen}
+        refresh={() => {
+          fetchClients();
+          fetchMetrics();
+        }}
+        data={selectedCliente}
+      />
+      <Button onClick={() => handleOpen()}>
+        <Plus size={18} className="mr-1" /> Instância+
+      </Button>
     </div>
   </div>
 
