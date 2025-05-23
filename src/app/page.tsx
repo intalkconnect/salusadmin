@@ -22,6 +22,7 @@ import {
   CheckCircle,
   XCircle,
   Server,
+  Clock
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import {
@@ -375,6 +376,20 @@ export default function ClientesPage() {
             </div>
           </CardContent>
         </Card>
+        <Card className="bg-yellow-300 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+  <CardContent className="flex items-center gap-4 p-4">
+    <Clock size={28} className="text-yellow-600" />
+    <div>
+      <h3 className="text-lg font-semibold text-yellow-800">
+        Tempo Médio (s)
+      </h3>
+      <p className="text-3xl font-bold text-yellow-900">
+        {metrics.tempo_medio_processamento_segundos}
+      </p>
+    </div>
+  </CardContent>
+</Card>
+
       </div>
 
       {/* Charts */}
