@@ -13,9 +13,9 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 type Props = {
-  cliente: Cliente,
-  refresh: () => void,
-  onEdit: () => void,
+  cliente: Cliente;
+  refresh: () => void;
+  onEdit: () => void;
 };
 
 const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
@@ -65,15 +65,14 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
           <Switch
             checked={cliente.ativo}
             onCheckedChange={handleToggleStatus}
+            className="data-[state=checked]:bg-green-500"
           />
         </div>
 
         <div className="flex justify-between items-center">
           <div>
             <p className="text-xs text-muted-foreground">API Key</p>
-            <p className="font-mono text-sm">
-              •••••{cliente.api_key.slice(-6)}
-            </p>
+            <p className="font-mono text-sm">•••••{cliente.api_key.slice(-6)}</p>
           </div>
           <Button
             variant="ghost"
