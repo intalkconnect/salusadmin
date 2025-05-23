@@ -328,9 +328,9 @@ export default function ClientesPage() {
       </div>
 
       {/* Metrics cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
         <Card className="bg-indigo-300 shadow-xl hover:shadow-2xl transition-shadow duration-300">
-          <CardContent className="flex items-center gap-4 p-4">
+          <CardContent className="flex items-center gap-3 p-3">
             <Briefcase size={28} className="text-indigo-600" />
             <div>
               <h3 className="text-lg font-semibold text-indigo-800">
