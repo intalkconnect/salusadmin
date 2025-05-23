@@ -123,20 +123,20 @@ const handleOpen = (cliente?: Cliente) => {
 
       <Charts metrics={metrics} />
 
-      <div className="space-y-4">
-        {paged.map((c) => (
-<InstanceCard
-  key={c.id}
-  cliente={c}
-  onEdit={() => handleOpen(c)}
-  refresh={() => {
-    fetchClients();
-    fetchMetrics();
-  }}
-/>
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  {paged.map((c) => (
+    <InstanceCard
+      key={c.id}
+      cliente={c}
+      refresh={() => {
+        fetchClients();
+        fetchMetrics();
+      }}
+      onEdit={() => handleOpen(c)}
+    />
+  ))}
+</div>
 
-        ))}
-      </div>
 
       <div className="flex items-center justify-center gap-4 mt-6">
         <Button
