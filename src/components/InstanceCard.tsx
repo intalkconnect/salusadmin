@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from "react";
@@ -15,9 +14,10 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 type Props = {
   cliente: Cliente;
   refresh: () => void;
+  onEdit: () => void; // ✅ Adiciona prop para abrir modal de edição
 };
 
-const InstanceCard = ({ cliente, refresh }: Props) => {
+const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
   const handleResetKey = async () => {
     if (!confirm("Regenerar API Key?")) return;
     const newKey = crypto.randomUUID();
@@ -92,9 +92,7 @@ const InstanceCard = ({ cliente, refresh }: Props) => {
               variant="ghost"
               size="icon"
               title="Editar"
-              onClick={() => {
-                toast("Funcionalidade de edição vindo do modal!"); // Aqui você pode abrir seu modal de edição
-              }}
+              onClick={onEdit} // ✅ Agora chama a função passada via props
             >
               <Edit2 size={16} />
             </Button>
