@@ -138,6 +138,7 @@ const handleOpen = (cliente?: Cliente) => {
 </div>
 
 
+
       <div className="flex items-center justify-center gap-4 mt-6">
         <Button
           variant="outline"
