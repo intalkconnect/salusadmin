@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { Cliente } from "../page";
+import { Cliente } from "@/app/lib/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
