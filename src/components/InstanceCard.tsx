@@ -58,86 +58,68 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
 
   return (
     <Card className="bg-white border border-slate-200 shadow-md hover:shadow-lg transition rounded-2xl">
-      <CardContent className="p-4">
-        <div className="flex justify-between items-start mb-2">
-          <div>
-            <label className="block text-xs text-slate-500">ID</label>
-            <span className="font-mono text-sm text-slate-700 truncate">
-              {cliente.id}
-            </span>
-          </div>
-          <div className="flex space-x-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              title="Copiar API Key"
-              onClick={() => {
-                navigator.clipboard.writeText(cliente.api_key);
-                toast.success("API Key copiada!");
-              }}
-            >
-              <Copy size={16} />
-            </Button>
+  <CardContent className="p-4 space-y-4">
 
-            <Button
-              variant="ghost"
-              size="icon"
-              title="Resetar API Key"
-              onClick={handleResetKey}
-            >
-              <RotateCcw size={16} />
-            </Button>
+    {/* Header */}
+    <div className="flex justify-between items-center">
+      <div>
+        <h2 className="text-lg font-semibold text-slate-800">{cliente.nome}</h2>
+        <p className="text-xs text-slate-500">
+          ID: <span className="font-mono">{cliente.id}</span>
+        </p>
+        <p className="text-xs text-slate-500">
+          API Key: <span className="font-mono">••••••{cliente.api_key.slice(-6)}</span>
+        </p>
+      </div>
 
-            <Button
-              variant="ghost"
-              size="icon"
-              title="Editar"
-              onClick={onEdit} // ✅ Agora chama a função passada via props
-            >
-              <Edit2 size={16} />
-            </Button>
+      <div className="flex space-x-2">
+        <Button variant="ghost" size="icon" title="Copiar API Key"
+          onClick={() => {
+            navigator.clipboard.writeText(cliente.api_key);
+            toast.success("API Key copiada!");
+          }}>
+          <Copy size={16} />
+        </Button>
+        <Button variant="ghost" size="icon" title="Resetar API Key" onClick={handleResetKey}>
+          <RotateCcw size={16} />
+        </Button>
+        <Button variant="ghost" size="icon" title="Editar" onClick={onEdit}>
+          <Edit2 size={16} />
+        </Button>
+        <Button variant="ghost" size="icon" title="Excluir" onClick={handleDelete}>
+          <Trash2 size={16} />
+        </Button>
+      </div>
+    </div>
 
-            <Button
-              variant="ghost"
-              size="icon"
-              title="Excluir"
-              onClick={handleDelete}
-            >
-              <Trash2 size={16} />
-            </Button>
-          </div>
-        </div>
+    {/* Financials */}
+    <div className="grid grid-cols-3 gap-4 text-center">
+      <div>
+        <p className="text-xs text-slate-500">Uso 30d</p>
+        <p className="text-base font-bold">${(cliente.uso * 0.01).toFixed(2)}</p>
+      </div>
+      <div>
+        <p className="text-xs text-slate-500">Atual</p>
+        <p className="text-base font-bold">${(cliente.uso_atual * 0.01).toFixed(2)}</p>
+      </div>
+      <div>
+        <p className="text-xs text-slate-500">Anterior</p>
+        <p className="text-base font-bold">${(cliente.uso_anterior * 0.01).toFixed(2)}</p>
+      </div>
+    </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-2 text-sm text-slate-700">
-          <div>
-            <label className="block text-xs text-slate-500">Cliente</label>
-            <p className="text-base font-medium text-slate-900 truncate">
-              {cliente.nome}
-            </p>
-          </div>
-          <div>
-            <label className="block text-xs text-slate-500">Uso 30d</label>
-            <p className="font-semibold">${(cliente.uso * 0.01).toFixed(2)}</p>
-          </div>
-          <div>
-            <label className="block text-xs text-slate-500">Atual</label>
-            <p className="font-semibold">${(cliente.uso_atual * 0.01).toFixed(2)}</p>
-          </div>
-          <div>
-            <label className="block text-xs text-slate-500">Anterior</label>
-            <p className="font-semibold">${(cliente.uso_anterior * 0.01).toFixed(2)}</p>
-          </div>
-        </div>
+    {/* Status */}
+    <div className="flex justify-end">
+      <Switch
+        checked={cliente.ativo}
+        onCheckedChange={handleToggleStatus}
+        className="bg-gray-200 data-[state=checked]:bg-green-500"
+      />
+    </div>
 
-        <div className="flex justify-end">
-          <Switch
-            checked={cliente.ativo}
-            onCheckedChange={handleToggleStatus}
-            className="bg-gray-200 data-[state=checked]:bg-green-500"
-          />
-        </div>
-      </CardContent>
-    </Card>
+  </CardContent>
+</Card>
+
   );
 };
 
