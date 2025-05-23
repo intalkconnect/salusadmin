@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from "react";
@@ -11,14 +10,14 @@ type Props = {
 };
 
 const COLORS = [
-  "#4f46e5", // indigo-600
-  "#059669", // emerald-600
-  "#d97706", // amber-600
-  "#dc2626", // red-600
-  "#0d9488", // teal-600
-  "#7c3aed", // violet-600
-  "#be123c", // rose-700
-  "#2563eb", // blue-600
+  "#4f46e5", // indigo
+  "#059669", // emerald
+  "#d97706", // amber
+  "#dc2626", // red
+  "#0d9488", // teal
+  "#7c3aed", // violet
+  "#be123c", // rose
+  "#2563eb", // blue
 ];
 
 const Charts = ({ metrics }: Props) => {
@@ -34,11 +33,11 @@ const Charts = ({ metrics }: Props) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-      {/* PieChart por tipo de arquivo */}
+      {/* Gráfico por tipo de arquivo */}
       <Card className="bg-white p-4 shadow-md hover:shadow-lg rounded-2xl transition">
-        <h3 className="text-lg font-semibold mb-2">Por Tipo de Arquivo</h3>
+        <h3 className="text-lg font-semibold mb-3">Por Tipo de Arquivo</h3>
         {fileData.length > 0 ? (
-          <ResponsiveContainer width="100%" height={250}>
+          <ResponsiveContainer width="100%" height={200}>
             <PieChart>
               <Pie
                 data={fileData}
@@ -46,7 +45,7 @@ const Charts = ({ metrics }: Props) => {
                 nameKey="name"
                 cx="50%"
                 cy="50%"
-                outerRadius={80}
+                outerRadius={60}
                 label={({ name, percent }) =>
                   `${name} (${(percent * 100).toFixed(0)}%)`
                 }
@@ -57,31 +56,34 @@ const Charts = ({ metrics }: Props) => {
               </Pie>
               <Tooltip />
               <Legend
-                layout="vertical"
-                verticalAlign="middle"
-                align="right"
+                layout="horizontal"
+                verticalAlign="bottom"
+                align="center"
+                wrapperStyle={{ fontSize: "12px" }}
               />
             </PieChart>
           </ResponsiveContainer>
         ) : (
-          <p className="text-sm text-slate-600">Nenhum registro encontrado</p>
+          <p className="text-sm text-slate-600">Nenhum dado encontrado</p>
         )}
       </Card>
 
-      {/* Lista de erros */}
+      {/* Lista de erros mais compacta */}
       <Card className="bg-white p-4 shadow-md hover:shadow-lg rounded-2xl transition">
-        <h3 className="text-lg font-semibold mb-2">Por Tipo de Erro</h3>
+        <h3 className="text-lg font-semibold mb-3">Por Tipo de Erro</h3>
         {errorData.length > 0 ? (
-          <div className="max-h-60 overflow-y-auto space-y-2 pr-2">
-            {errorData.map((err, i) => (
+          <div className="space-y-1">
+            <div className="flex justify-between font-semibold border-b pb-1">
+              <span>Erro</span>
+              <span>Qtd</span>
+            </div>
+            {errorData.map((err) => (
               <div
-                key={i}
-                className="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-200"
+                key={err.name}
+                className="flex justify-between text-sm text-slate-700"
               >
-                <span className="text-sm text-slate-700">{err.name}</span>
-                <span className="text-sm font-semibold text-rose-600">
-                  {err.value}
-                </span>
+                <span>{err.name}</span>
+                <span className="font-medium">{err.value}</span>
               </div>
             ))}
           </div>
