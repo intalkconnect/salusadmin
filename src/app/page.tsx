@@ -170,18 +170,20 @@ export default function ClientesPage() {
     }
   };
 
-  const handleOpen = (c?: Cliente) => {
-    if (c) {
-      setData(c);
-      setNome(c.nome);
-      setApiKey(c.api_key);
-    } else {
-      setData({});
-      setNome("");
-      setApiKey("");
-    }
-    setOpen(true);
-  };
+const handleOpen = (c?: Cliente) => {
+  if (c) {
+    setData(c);
+    setNome(c.nome);
+    setApiKey(c.api_key);
+  } else {
+    const newKey = crypto.randomUUID();
+    setData({});
+    setNome("");
+    setApiKey(newKey); // já seta a nova key aqui
+  }
+  setOpen(true);
+};
+
 
   const handleSubmit = async () => {
     const method = Data.id ? "PATCH" : "POST";
