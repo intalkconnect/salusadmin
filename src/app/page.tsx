@@ -84,92 +84,101 @@ export default function ClientesPage() {
 
   return (
     <div className="max-w-7xl mx-auto p-6 h-[calc(100vh-40px)] flex flex-col gap-6">
-      {/* Filtros e Ações */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-        <h1 className="text-2xl font-semibold">Instâncias</h1>
-        <div className="flex flex-col md:flex-row gap-2">
-          <Input
-            placeholder="Search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <Select onValueChange={(v: string) => setStatusFilter(v)}>
-            <SelectTrigger className="w-36">
-              <SelectValue placeholder="Status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All</SelectItem>
-              <SelectItem value="active">Active</SelectItem>
-              <SelectItem value="inactive">Inactive</SelectItem>
-            </SelectContent>
-          </Select>
-          <Button
-            variant="outline"
-            onClick={() => {
-              fetchClients();
-              fetchMetrics();
-            }}
-          >
-            <RefreshCw size={18} />
-          </Button>
-          <InstanceFormDialog
-            open={open}
-            setOpen={setOpen}
-            refresh={() => {
-              fetchClients();
-              fetchMetrics();
-            }}
-            data={selectedCliente}
-          />
-          <Button onClick={() => handleOpen()}>
-            <Plus size={18} className="mr-1" /> Instância+
-          </Button>
-        </div>
-      </div>
-
-      {/* Dashboard - fixo no topo */}
-      <div className="flex flex-col gap-4">
-        <MetricsCards metrics={metrics} totalClientes={clientes.length} />
-        <Charts metrics={metrics} />
-      </div>
-
-      {/* Área de Instâncias com scroll */}
-      <div className="flex-1 overflow-auto border rounded-xl p-4 bg-background">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {paged.map((c) => (
-            <InstanceCard
-              key={c.id}
-              cliente={c}
-              refresh={() => {
-                fetchClients();
-                fetchMetrics();
-              }}
-              onEdit={() => handleOpen(c)}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Paginação */}
-      <div className="flex items-center justify-center gap-4">
-        <Button
-          variant="outline"
-          onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-          disabled={currentPage === 1}
-        >
-          Anterior
-        </Button>
-        <span>
-          Página {currentPage} de {totalPages}
-        </span>
-        <Button
-          variant="outline"
-          onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-          disabled={currentPage === totalPages}
-        >
-          Próximo
-        </Button>
-      </div>
+  {/* Header e filtros */}
+  <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+    <h1 className="text-3xl font-bold">Salus Admin</h1>
+    <div className="flex flex-col md:flex-row gap-2">
+      <Input
+        placeholder="Search"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      <Select onValueChange={(v: string) => setStatusFilter(v)}>
+        <SelectTrigger className="w-36">
+          <SelectValue placeholder="Status" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All</SelectItem>
+          <SelectItem value="active">Active</SelectItem>
+          <SelectItem value="inactive">Inactive</SelectItem>
+        </SelectContent>
+      </Select>
+      <Button
+        variant="outline"
+        onClick={() => {
+          fetchClients();
+          fetchMetrics();
+        }}
+      >
+        <RefreshCw size={18} />
+      </Button>
+      <InstanceFormDialog
+        open={open}
+        setOpen={setOpen}
+        refresh={() => {
+          fetchClients();
+          fetchMetrics();
+        }}
+        data={selectedCliente}
+      />
+      <Button onClick={() => handleOpen()}>
+        <Plus size={18} className="mr-1" /> Instância+
+      </Button>
     </div>
+  </div>
+
+  {/* Dashboard */}
+  <div>
+    <h2 className="text-xl font-semibold text-muted-foreground mb-2">
+      📊 Dashboard
+    </h2>
+    <div className="flex flex-col gap-4">
+      <MetricsCards metrics={metrics} totalClientes={clientes.length} />
+      <Charts metrics={metrics} />
+    </div>
+  </div>
+
+  {/* Área de Instâncias */}
+  <div className="flex-1 overflow-auto border rounded-xl p-4 bg-background">
+    <h2 className="text-xl font-semibold text-muted-foreground mb-4">
+      🗂️ Instâncias
+    </h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {paged.map((c) => (
+        <InstanceCard
+          key={c.id}
+          cliente={c}
+          refresh={() => {
+            fetchClients();
+            fetchMetrics();
+          }}
+          onEdit={() => handleOpen(c)}
+        />
+      ))}
+    </div>
+  </div>
+
+  {/* Paginação */}
+  <div className="flex items-center justify-center gap-4">
+    <Button
+      variant="outline"
+      onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+      disabled={currentPage === 1}
+    >
+      Anterior
+    </Button>
+    <span>
+      Página {currentPage} de {totalPages}
+    </span>
+    <Button
+      variant="outline"
+      onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+      disabled={currentPage === totalPages}
+    >
+      Próximo
+    </Button>
+  </div>
+</div>
+
   );
 }
