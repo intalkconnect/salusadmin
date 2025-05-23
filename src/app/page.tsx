@@ -15,24 +15,7 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 const ITEMS_PER_PAGE = 6;
 
-export type Cliente = {
-  id: string;
-  nome: string;
-  api_key: string;
-  uso: number;
-  uso_atual: number;
-  uso_anterior: number;
-  ativo: boolean;
-};
-
-export type Metrics = {
-  total_jobs: number;
-  sucessos: number;
-  falhas: number;
-  por_tipo_arquivo: Record<string, number>;
-  por_tipo_erro: Record<string, number>;
-  tempo_medio_processamento_segundos: number;
-};
+import { Cliente, Metrics } from "@/app/lib/types";
 
 export default function ClientesPage() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
