@@ -268,7 +268,7 @@ const handleOpen = (c?: Cliente) => {
           </Button>
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-              <Button>
+              <Button onClick={() => handleOpen()}>
                 <Plus size={18} className="mr-1" /> Instância+
               </Button>
             </DialogTrigger>
