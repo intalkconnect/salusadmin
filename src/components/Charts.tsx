@@ -10,14 +10,7 @@ type Props = {
 };
 
 const COLORS = [
-  "#4f46e5", // indigo
-  "#059669", // emerald
-  "#d97706", // amber
-  "#dc2626", // red
-  "#0d9488", // teal
-  "#7c3aed", // violet
-  "#be123c", // rose
-  "#2563eb", // blue
+  "#4f46e5", "#059669", "#d97706", "#dc2626", "#0d9488", "#7c3aed", "#be123c", "#2563eb",
 ];
 
 const Charts = ({ metrics }: Props) => {
@@ -32,12 +25,12 @@ const Charts = ({ metrics }: Props) => {
   }));
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       {/* Gráfico por tipo de arquivo */}
-      <Card className="bg-card p-4 shadow-md hover:shadow-lg rounded-2xl transition">
-        <h3 className="text-lg font-semibold mb-3">Por Tipo de Arquivo</h3>
+      <Card className="bg-card p-3 shadow-md rounded-xl transition max-w-sm w-full">
+        <h3 className="text-md font-semibold mb-2">Por Tipo de Arquivo</h3>
         {fileData.length > 0 ? (
-          <ResponsiveContainer width="100%" height={200}>
+          <ResponsiveContainer width="100%" height={150}>
             <PieChart>
               <Pie
                 data={fileData}
@@ -45,7 +38,7 @@ const Charts = ({ metrics }: Props) => {
                 nameKey="name"
                 cx="50%"
                 cy="50%"
-                outerRadius={60}
+                outerRadius={45} // reduzido
                 label={({ name, percent }) =>
                   `${name} (${(percent * 100).toFixed(0)}%)`
                 }
@@ -55,32 +48,27 @@ const Charts = ({ metrics }: Props) => {
                 ))}
               </Pie>
               <Tooltip />
-              <Legend
-                layout="horizontal"
-                verticalAlign="bottom"
-                align="center"
-                wrapperStyle={{ fontSize: "12px" }}
-              />
+              <Legend layout="horizontal" verticalAlign="bottom" align="center" wrapperStyle={{ fontSize: "10px" }} />
             </PieChart>
           </ResponsiveContainer>
         ) : (
-          <p className="text-sm text-slate-600">Nenhum dado encontrado</p>
+          <p className="text-xs text-slate-500">Nenhum dado encontrado</p>
         )}
       </Card>
 
-      {/* Lista de erros mais compacta */}
-      <Card className="bg-card p-4 shadow-md hover:shadow-lg rounded-2xl transition">
-        <h3 className="text-lg font-semibold mb-3">Por Tipo de Erro</h3>
+      {/* Lista de erros compacta */}
+      <Card className="bg-card p-3 shadow-md rounded-xl transition max-w-sm w-full">
+        <h3 className="text-md font-semibold mb-2">Por Tipo de Erro</h3>
         {errorData.length > 0 ? (
           <div className="space-y-1">
-            <div className="flex justify-between font-semibold border-b pb-1">
+            <div className="flex justify-between font-semibold border-b pb-1 text-sm">
               <span>Erro</span>
               <span>Qtd</span>
             </div>
             {errorData.map((err) => (
               <div
                 key={err.name}
-                className="flex justify-between text-sm text-slate-700"
+                className="flex justify-between text-xs text-slate-700"
               >
                 <span>{err.name}</span>
                 <span className="font-medium">{err.value}</span>
@@ -88,7 +76,7 @@ const Charts = ({ metrics }: Props) => {
             ))}
           </div>
         ) : (
-          <p className="text-sm text-slate-600">Nenhum erro encontrado</p>
+          <p className="text-xs text-slate-500">Nenhum erro encontrado</p>
         )}
       </Card>
     </div>
