@@ -4,6 +4,7 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { Metrics } from "../app/lib/types";
+import { BarChart3, AlertCircle } from "lucide-react";
 
 type Props = {
   metrics: Metrics;
@@ -27,8 +28,11 @@ const Charts = ({ metrics }: Props) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       {/* Gráfico por tipo de arquivo */}
-      <Card className="bg-card p-3 shadow-md rounded-xl transition max-w-sm w-full">
-        <h3 className="text-md font-semibold mb-2">Por Tipo de Arquivo</h3>
+      <Card className="bg-muted/70 border border-dashed border-border p-3 shadow-sm rounded-xl transition">
+        <div className="flex items-center gap-2 mb-2">
+          <BarChart3 size={16} className="text-primary" />
+          <h3 className="text-md font-semibold">Por Tipo de Arquivo</h3>
+        </div>
         {fileData.length > 0 ? (
           <ResponsiveContainer width="100%" height={150}>
             <PieChart>
@@ -38,7 +42,7 @@ const Charts = ({ metrics }: Props) => {
                 nameKey="name"
                 cx="50%"
                 cy="50%"
-                outerRadius={45} // reduzido
+                outerRadius={45}
                 label={({ name, percent }) =>
                   `${name} (${(percent * 100).toFixed(0)}%)`
                 }
@@ -56,9 +60,12 @@ const Charts = ({ metrics }: Props) => {
         )}
       </Card>
 
-      {/* Lista de erros compacta */}
-      <Card className="bg-card p-3 shadow-md rounded-xl transition max-w-sm w-full">
-        <h3 className="text-md font-semibold mb-2">Por Tipo de Erro</h3>
+      {/* Lista de erros */}
+      <Card className="bg-muted/70 border border-dashed border-border p-3 shadow-sm rounded-xl transition">
+        <div className="flex items-center gap-2 mb-2">
+          <AlertCircle size={16} className="text-rose-600" />
+          <h3 className="text-md font-semibold">Por Tipo de Erro</h3>
+        </div>
         {errorData.length > 0 ? (
           <div className="space-y-1">
             <div className="flex justify-between font-semibold border-b pb-1 text-sm">
