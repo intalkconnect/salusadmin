@@ -4,7 +4,7 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { Metrics } from "../page";
+import { Metrics } from "@/app/lib/types";
 
 type Props = {
   metrics: Metrics;
