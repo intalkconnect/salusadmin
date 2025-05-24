@@ -1,17 +1,18 @@
-import { createServerClient } from '@logto/next';
+import { getLogtoContext } from '@logto/next/server-actions';
 import { redirect } from 'next/navigation';
-import AdminPageContent from '@/app/admin/AdminPageContent';
+import AdminPageContent from './AdminPageContent';
+import { logtoConfig } from '@/lib/logto';
 
 export default async function AdminPage() {
-  const logto = createServerClient();
+  const { isAuthenticated, claims } = await getLogtoContext(logtoConfig);
 
-  if (!logto.isAuthenticated) {
-    redirect('/api/logto');
+  if (!isAuthenticated) {
+    redirect('/api/logto'); // 🔒 Redireciona para login
   }
 
-  const user = await logto.getUserInfo();
+  const role = claims?.role;
 
-  if (user?.customClaims?.role !== 'admin') {
+  if (role !== 'admin') {
     redirect('/client'); // 🔒 Se não for admin, manda para client
   }
 
@@ -20,7 +21,7 @@ export default async function AdminPage() {
       <header className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Painel Administrativo</h1>
         <div className="flex items-center gap-4">
-          <span>Bem-vindo, {user?.name}</span>
+          <span>Bem-vindo, {claims?.sub}</span>
           <a
             href="/api/logto/sign-out"
             className="px-4 py-2 bg-red-500 text-white rounded"
