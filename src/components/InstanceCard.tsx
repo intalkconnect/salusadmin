@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Cliente } from "../app/lib/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,7 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
   const [metrics, setMetrics] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
+  // 🚀 ✅ Função faz requisição PARA O ID DA INSTÂNCIA!
   const handleFetchMetrics = async () => {
     setLoading(true);
     try {
@@ -38,10 +39,10 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
         });
         setShowModal(true);
       } else {
-        toast.error("Erro ao buscar métricas");
+        toast.error("Erro ao buscar métricas.");
       }
     } catch (error) {
-      toast.error("Erro ao buscar métricas");
+      toast.error("Erro na requisição.");
     } finally {
       setLoading(false);
     }
@@ -135,7 +136,9 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl w-[400px] shadow-lg space-y-4">
-            <h2 className="text-lg font-semibold">Métricas - {cliente.nome}</h2>
+            <h2 className="text-lg font-semibold">
+              Métricas - {cliente.nome}
+            </h2>
 
             {loading ? (
               <p>Carregando...</p>
