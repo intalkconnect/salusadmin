@@ -19,14 +19,14 @@ const MetricsCards = ({ metrics, totalClientes }: Props) => {
     },
     {
       title: "Sucessos",
-      value: metrics.sucessos,
+      value: metrics.success,
       color: "bg-green-100",
       textColor: "text-green-800",
       icon: <CheckCircle size={22} className="text-green-600" />,
     },
     {
       title: "Falhas",
-      value: metrics.falhas,
+      value: metrics.failures,
       color: "bg-rose-100",
       textColor: "text-rose-800",
       icon: <XCircle size={22} className="text-rose-600" />,
@@ -40,7 +40,7 @@ const MetricsCards = ({ metrics, totalClientes }: Props) => {
     },
     {
       title: "Tempo Médio (s)",
-      value: metrics.tempo_medio_processamento_segundos,
+      value: metrics.avg_processing_time_secondss,
       color: "bg-yellow-100",
       textColor: "text-yellow-800",
       icon: <Clock size={22} className="text-yellow-600" />,
