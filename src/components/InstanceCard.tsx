@@ -128,7 +128,7 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
 
 >
   <Copy size={16} />
-</Button>
+ </Button>
           </div>
         </CardContent>
       </Card>
