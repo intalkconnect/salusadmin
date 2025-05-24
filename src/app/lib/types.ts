@@ -15,4 +15,6 @@ export type Metrics = {
   by_file_type: Record<string, number>;
   by_error_type: Record<string, number>;
   avg_processing_time_seconds: number;
+  total_jobs_prev_month: number;
 };
+
