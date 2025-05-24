@@ -13,10 +13,10 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 
-import MetricsCards from "../components/MetricsCards";
-import Charts from "../components/Charts";
-import InstanceCard from "../components/InstanceCard";
-import InstanceFormDialog from "../components/InstanceFormDialog";
+import MetricsCards from '@/components/MetricsCards';
+import Charts from '@/components/Charts';
+import InstanceCard from '@/components/InstanceCard';
+import InstanceFormDialog from '@/components/InstanceFormDialog';
 
 import { Cliente, Metrics } from "./lib/types";
 
