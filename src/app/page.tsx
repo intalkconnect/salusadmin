@@ -27,11 +27,11 @@ export default function ClientesPage() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
   const [metrics, setMetrics] = useState<Metrics>({
     total_jobs: 0,
-    sucessos: 0,
-    falhas: 0,
-    por_tipo_arquivo: {},
-    por_tipo_erro: {},
-    tempo_medio_processamento_segundos: 0,
+    success: 0,
+    failures: 0,
+    by_file_type: {},
+    by_error_type: {},
+    avg_processing_time_seconds: 0,
   });
 
   const [search, setSearch] = useState("");
