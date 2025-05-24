@@ -25,16 +25,15 @@ const ITEMS_PER_PAGE = 6;
 
 export default function ClientesPage() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
-const [metrics, setMetrics] = useState<Metrics>({
-  total_jobs: 0,
-  success: 0,
-  failures: 0,
-  by_file_type: {},
-  by_error_type: {},
-  avg_processing_time_seconds: 0,
-  total_jobs_prev_month: 0, // <-- 🔥 Campo obrigatório que estava faltando
-});
-
+  const [metrics, setMetrics] = useState<Metrics>({
+    total_jobs: 0,
+    success: 0,
+    failures: 0,
+    by_file_type: {},
+    by_error_type: {},
+    avg_processing_time_seconds: 0,
+    total_jobs_prev_month: 0
+  });
 
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -134,7 +133,7 @@ const [metrics, setMetrics] = useState<Metrics>({
     <h2 className="text-2xl font-semibold flex items-center gap-2">
       📊 Dashboard
     </h2>
-    <MetricsCards />
+    <MetricsCards metrics={metrics} totalClientes={clientes.length} />
     <Charts metrics={metrics} />
   </div>
 
