@@ -40,7 +40,7 @@ const MetricsCards = ({ metrics, totalClientes }: Props) => {
     },
     {
       title: "Tempo Médio (s)",
-      value: metrics.avg_processing_time_secondss,
+      value: metrics.avg_processing_time_secondss.toFixed(2),
       color: "bg-yellow-100",
       textColor: "text-yellow-800",
       icon: <Clock size={22} className="text-yellow-600" />,
