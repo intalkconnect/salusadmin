@@ -10,9 +10,9 @@ export type Cliente = {
 
 export type Metrics = {
   total_jobs: number;
-  sucessos: number;
-  falhas: number;
-  por_tipo_arquivo: Record<string, number>;
-  por_tipo_erro: Record<string, number>;
-  tempo_medio_processamento_segundos: number;
+  success: number;
+  failures: number;
+  by_file_type: Record<string, number>;
+  by_error_type: Record<string, number>;
+  avg_processing_time_seconds: number;
 };
