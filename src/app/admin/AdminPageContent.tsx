@@ -18,7 +18,7 @@ import Charts from '@/components/Charts';
 import InstanceCard from '@/components/InstanceCard';
 import InstanceFormDialog from '@/components/InstanceFormDialog';
 
-import { Cliente, Metrics } from "@/lib/types";
+import { Cliente, Metrics } from "../lib/types";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
