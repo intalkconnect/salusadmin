@@ -1,6 +1,7 @@
 import { getLogtoContext } from '@logto/next/server-actions';
 import { redirect } from 'next/navigation';
-import AdminPageContent from './AdminPageContent';
+import AdminPageContent from '@/app/admin/AdminPageContent';
+
 import { logtoConfig } from '@/lib/logto';
 
 export default async function AdminPage() {
