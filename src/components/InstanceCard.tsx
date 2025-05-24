@@ -24,7 +24,7 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
     failures: number;
     by_file_type: Record<string, number>;
     by_error_type: Record<string, number>;
-    avg_processing_time_seconds: number | null;
+    avg_processing_time_seconds: number;
     total_jobs_prev_month: number;
   } | null>(null);
 
@@ -38,7 +38,11 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
         });
         if (res.ok) {
           const data = await res.json();
-          setMetrics(data);
+          // ✅ Se algum dado vier null, converte para zero
+          setMetrics({
+            ...data,
+            avg_processing_time_seconds: data.avg_processing_time_seconds ?? 0,
+          });
         } else {
           setMetrics(null);
         }
@@ -123,11 +127,9 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
             <p><strong>Success:</strong> {metrics.success}</p>
             <p><strong>Failures:</strong> {metrics.failures}</p>
             <p><strong>Jobs (Previous Month):</strong> {metrics.total_jobs_prev_month}</p>
-            {metrics.avg_processing_time_seconds !== null && (
-              <p>
-                <strong>Avg Time:</strong> {metrics.avg_processing_time_seconds.toFixed(2)}s
-              </p>
-            )}
+            <p>
+              <strong>Avg Time:</strong> {metrics.avg_processing_time_seconds.toFixed(2)}s
+            </p>
           </div>
         )}
 
