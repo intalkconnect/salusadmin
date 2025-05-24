@@ -102,18 +102,21 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
           <div className="flex justify-between items-center">
             <div>
               <p className="text-xs text-muted-foreground">API Key</p>
-              <p className="font-mono text-sm">•••••{cliente.api_key.slice(-6)}</p>
+              <p className="font-mono text-sm">{cliente.id}</p>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                navigator.clipboard.writeText(cliente.api_key);
-                toast.success("API Key copiada!");
-              }}
-            >
-              <Copy size={16} />
-            </Button>
+<Button
+  variant="ghost"
+  size="sm"
+  onClick={() => {
+    navigator.clipboard.writeText(cliente.api_key);
+    toast.success("API Key copiada!");
+  }}
+  className="flex items-center gap-1"
+>
+  <Copy size={16} />
+  <span className="text-xs">Copiar API Key</span>
+</Button>
+
           </div>
 
           <div className="flex justify-end gap-2">
