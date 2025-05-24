@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Copy, RotateCcw, Edit2, Trash2, BarChart2 } from "lucide-react";
 import toast from "react-hot-toast";
+import * as Tooltip from "@radix-ui/react-tooltip";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
@@ -22,14 +23,11 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
   const [metrics, setMetrics] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  // 🚀 ✅ Função faz requisição PARA O ID DA INSTÂNCIA!
   const handleFetchMetrics = async () => {
     setLoading(true);
     try {
       const res = await fetch(`${API_BASE}/clientes/${cliente.id}/metrics`, {
-        headers: {
-          Authorization: `Bearer ${API_KEY}`,
-        },
+        headers: { Authorization: `Bearer ${API_KEY}` },
       });
       if (res.ok) {
         const data = await res.json();
@@ -67,9 +65,7 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
     if (!confirm("Deseja excluir essa instância?")) return;
     await fetch(`${API_BASE}/clientes/${cliente.id}`, {
       method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${API_KEY}`,
-      },
+      headers: { Authorization: `Bearer ${API_KEY}` },
     });
     refresh();
   };
@@ -99,39 +95,90 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
             />
           </div>
 
-          <div className="flex justify-between items-center">
-            <div>
-              <p className="text-xs text-muted-foreground">{cliente.id}</p>
-            </div>
+          <div>
+            <p className="text-xs text-muted-foreground">{cliente.id}</p>
           </div>
 
-          <div className="flex justify-end gap-2">
-            <Button variant="outline" size="icon" onClick={onEdit}>
-              <Edit2 size={16} />
-            </Button>
-            <Button variant="outline" size="icon" onClick={handleResetKey}>
-              <RotateCcw size={16} />
-            </Button>
-            <Button variant="outline" size="icon" onClick={handleFetchMetrics}>
-              <BarChart2 size={16} />
-            </Button>
-            <Button variant="destructive" size="icon" onClick={handleDelete}>
-              <Trash2 size={16} />
-            </Button>
-            <Button
-  variant="ghost"
- size="icon"
-  onClick={() => {
-    navigator.clipboard.writeText(cliente.api_key);
-    toast.success("API Key copiada!");
-  }}
+          <div className="flex flex-wrap justify-end gap-2">
+            <Tooltip.Provider>
+              <Tooltip.Root>
+                <Tooltip.Trigger asChild>
+                  <Button variant="outline" size="icon" onClick={onEdit}>
+                    <Edit2 size={16} />
+                  </Button>
+                </Tooltip.Trigger>
+                <Tooltip.Portal>
+                  <Tooltip.Content className="bg-black text-white px-2 py-1 rounded text-xs">
+                    Editar Instância
+                  </Tooltip.Content>
+                </Tooltip.Portal>
+              </Tooltip.Root>
 
->
-  <Copy size={16} />
- </Button>
+              <Tooltip.Root>
+                <Tooltip.Trigger asChild>
+                  <Button variant="outline" size="icon" onClick={handleResetKey}>
+                    <RotateCcw size={16} />
+                  </Button>
+                </Tooltip.Trigger>
+                <Tooltip.Portal>
+                  <Tooltip.Content className="bg-black text-white px-2 py-1 rounded text-xs">
+                    Resetar API Key
+                  </Tooltip.Content>
+                </Tooltip.Portal>
+              </Tooltip.Root>
+
+              <Tooltip.Root>
+                <Tooltip.Trigger asChild>
+                  <Button variant="outline" size="icon" onClick={handleFetchMetrics}>
+                    <BarChart2 size={16} />
+                  </Button>
+                </Tooltip.Trigger>
+                <Tooltip.Portal>
+                  <Tooltip.Content className="bg-black text-white px-2 py-1 rounded text-xs">
+                    Ver Métricas
+                  </Tooltip.Content>
+                </Tooltip.Portal>
+              </Tooltip.Root>
+
+              <Tooltip.Root>
+                <Tooltip.Trigger asChild>
+                  <Button variant="destructive" size="icon" onClick={handleDelete}>
+                    <Trash2 size={16} />
+                  </Button>
+                </Tooltip.Trigger>
+                <Tooltip.Portal>
+                  <Tooltip.Content className="bg-black text-white px-2 py-1 rounded text-xs">
+                    Excluir Instância
+                  </Tooltip.Content>
+                </Tooltip.Portal>
+              </Tooltip.Root>
+
+              <Tooltip.Root>
+                <Tooltip.Trigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="flex items-center gap-1"
+                    onClick={() => {
+                      navigator.clipboard.writeText(cliente.api_key);
+                      toast.success("API Key copiada!");
+                    }}
+                  >
+                    <Copy size={16} />
+                    <span className="text-xs">Copiar Key</span>
+                  </Button>
+                </Tooltip.Trigger>
+                <Tooltip.Portal>
+                  <Tooltip.Content className="bg-black text-white px-2 py-1 rounded text-xs">
+                    Copiar API Key
+                  </Tooltip.Content>
+                </Tooltip.Portal>
+              </Tooltip.Root>
+            </Tooltip.Provider>
           </div>
         </CardContent>
       </Card>
+
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl w-[400px] shadow-lg space-y-4">
