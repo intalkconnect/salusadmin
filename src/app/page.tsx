@@ -84,7 +84,7 @@ export default function ClientesPage() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto p-6 flex flex-col gap-8 h-screen">
+    <div className="max-w-7xl mx-auto p-6 flex flex-col gap-8 min-h-screen">
   {/* Header + filtros */}
 <div className="flex flex-col md:flex-row items-center justify-between gap-4">
     <h1 className="text-3xl font-bold">Salus Admin</h1>
