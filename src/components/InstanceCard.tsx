@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Cliente } from "../app/lib/types";
+import { Cliente } from "@/app/lib/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
