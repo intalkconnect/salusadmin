@@ -44,7 +44,7 @@ const MetricsCards = () => {
           fetch(`${API_BASE}/clientes`, {
             headers: { Authorization: `Bearer ${API_KEY}` },
           }),
-          fetch(`${API_BASE}/metrics`, {
+          fetch(`${API_BASE}/clientes/metrics`, {
             headers: { Authorization: `Bearer ${API_KEY}` },
           }),
         ]);
@@ -137,7 +137,7 @@ const MetricsCards = () => {
 
   return (
     <>
-      {/* 📊 Cards Globais */}
+      {/* 🔥 Cards Globais */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
         {cards.map((card) => (
           <Card
