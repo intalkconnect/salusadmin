@@ -1,19 +1,18 @@
-import { getServerSideLogtoContext } from '@logto/next';
-
+import { createServerClient } from '@logto/next';
 import { redirect } from 'next/navigation';
 import AdminPageContent from '@/app/admin/AdminPageContent';
 
 export default async function AdminPage() {
-  const { isAuthenticated, getUserInfo } = getServerSideLogtoContext();
+  const logto = createServerClient();
 
-  if (!isAuthenticated) {
+  if (!logto.isAuthenticated) {
     redirect('/api/logto');
   }
 
-  const user = await getUserInfo();
+  const user = await logto.getUserInfo();
 
   if (user?.customClaims?.role !== 'admin') {
-    redirect('/client'); // 🔒 Não é admin, manda para client
+    redirect('/client'); // 🔒 Se não for admin, manda para client
   }
 
   return (
