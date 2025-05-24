@@ -29,24 +29,29 @@ type Metrics = {
 const MetricsCards = () => {
   const [clientes, setClientes] = useState<Cliente[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [metricsGlobal, setMetricsGlobal] = useState<any>(null);
-  const [metricsInstance, setMetricsInstance] = useState<any>(null);
+  const [metricsGlobal, setMetricsGlobal] = useState<Metrics | null>(null);
+
+  const [metricsInstance, setMetricsInstance] = useState<Metrics | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [currentClientName, setCurrentClientName] = useState<string>("");
+  const [loadingInstance, setLoadingInstance] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const resClientes = await fetch(`${API_BASE}/clientes`, {
-          headers: { Authorization: `Bearer ${API_KEY}` },
-        });
+        const [resClientes, resMetrics] = await Promise.all([
+          fetch(`${API_BASE}/clientes`, {
+            headers: { Authorization: `Bearer ${API_KEY}` },
+          }),
+          fetch(`${API_BASE}/metrics`, {
+            headers: { Authorization: `Bearer ${API_KEY}` },
+          }),
+        ]);
+
         const clientes = await resClientes.json();
         setClientes(clientes);
 
-        const resMetrics = await fetch(`${API_BASE}/metrics`, {
-          headers: { Authorization: `Bearer ${API_KEY}` },
-        });
         const dataMetrics = await resMetrics.json();
         setMetricsGlobal({
           ...dataMetrics,
@@ -65,6 +70,9 @@ const MetricsCards = () => {
   const handleOpenMetrics = async (id: string, name: string) => {
     setShowModal(true);
     setCurrentClientName(name);
+    setLoadingInstance(true);
+    setMetricsInstance(null);
+
     try {
       const res = await fetch(`${API_BASE}/clientes/${id}/metrics`, {
         headers: { Authorization: `Bearer ${API_KEY}` },
@@ -76,7 +84,14 @@ const MetricsCards = () => {
       });
     } catch (error) {
       toast.error("Erro ao buscar métricas da instância.");
+    } finally {
+      setLoadingInstance(false);
     }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setMetricsInstance(null);
   };
 
   if (loading) return <p>Carregando...</p>;
@@ -122,6 +137,7 @@ const MetricsCards = () => {
 
   return (
     <>
+      {/* Cards Globais */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
         {cards.map((card) => (
           <Card
@@ -143,6 +159,7 @@ const MetricsCards = () => {
         ))}
       </div>
 
+      {/* Cards de Instâncias */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {clientes.map((cliente) => (
           <Card
@@ -175,36 +192,43 @@ const MetricsCards = () => {
         ))}
       </div>
 
-      {showModal && metricsInstance && (
+      {/* Modal de Métricas da Instância */}
+      {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl w-[400px] shadow-lg space-y-4">
             <h2 className="text-lg font-semibold">
               Métricas - {currentClientName}
             </h2>
 
-            <div className="space-y-1 text-sm text-muted-foreground">
-              <p>
-                <strong>Jobs (Current Month):</strong>{" "}
-                {metricsInstance.total_jobs}
-              </p>
-              <p>
-                <strong>Success:</strong> {metricsInstance.success}
-              </p>
-              <p>
-                <strong>Failures:</strong> {metricsInstance.failures}
-              </p>
-              <p>
-                <strong>Jobs (Previous Month):</strong>{" "}
-                {metricsInstance.total_jobs_prev_month}
-              </p>
-              <p>
-                <strong>Avg Time:</strong>{" "}
-                {(metricsInstance.avg_processing_time_seconds ?? 0).toFixed(2)}s
-              </p>
-            </div>
+            {loadingInstance ? (
+              <p>Carregando métricas...</p>
+            ) : metricsInstance ? (
+              <div className="space-y-1 text-sm text-muted-foreground">
+                <p>
+                  <strong>Jobs (Current Month):</strong>{" "}
+                  {metricsInstance.total_jobs}
+                </p>
+                <p>
+                  <strong>Success:</strong> {metricsInstance.success}
+                </p>
+                <p>
+                  <strong>Failures:</strong> {metricsInstance.failures}
+                </p>
+                <p>
+                  <strong>Jobs (Previous Month):</strong>{" "}
+                  {metricsInstance.total_jobs_prev_month}
+                </p>
+                <p>
+                  <strong>Avg Time:</strong>{" "}
+                  {(metricsInstance.avg_processing_time_seconds ?? 0).toFixed(2)}s
+                </p>
+              </div>
+            ) : (
+              <p>Erro ao carregar métricas.</p>
+            )}
 
             <div className="flex justify-end">
-              <Button variant="outline" onClick={() => setShowModal(false)}>
+              <Button variant="outline" onClick={handleCloseModal}>
                 Fechar
               </Button>
             </div>
