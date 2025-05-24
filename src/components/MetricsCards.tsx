@@ -137,7 +137,7 @@ const MetricsCards = () => {
 
   return (
     <>
-      {/* Cards Globais */}
+      {/* 📊 Cards Globais */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
         {cards.map((card) => (
           <Card
@@ -159,7 +159,7 @@ const MetricsCards = () => {
         ))}
       </div>
 
-      {/* Cards de Instâncias */}
+      {/* 🏢 Cards de Instâncias */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {clientes.map((cliente) => (
           <Card
@@ -192,7 +192,7 @@ const MetricsCards = () => {
         ))}
       </div>
 
-      {/* Modal de Métricas da Instância */}
+      {/* 🔍 Modal de Métricas da Instância */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl w-[400px] shadow-lg space-y-4">
