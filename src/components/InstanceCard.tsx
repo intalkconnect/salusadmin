@@ -1,4 +1,3 @@
-// InstanceCard.tsx
 "use client";
 
 import React from "react";
@@ -19,6 +18,38 @@ type Props = {
 };
 
 const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
+  const [metrics, setMetrics] = React.useState<{
+    total_jobs: number;
+    success: number;
+    failures: number;
+    by_file_type: Record<string, number>;
+    by_error_type: Record<string, number>;
+    avg_processing_time_seconds: number | null;
+    total_jobs_prev_month: number;
+  } | null>(null);
+
+  React.useEffect(() => {
+    const fetchMetrics = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/clientes/${cliente.id}/metrics`, {
+          headers: {
+            Authorization: `Bearer ${API_KEY}`,
+          },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setMetrics(data);
+        } else {
+          setMetrics(null);
+        }
+      } catch (err) {
+        setMetrics(null);
+      }
+    };
+
+    fetchMetrics();
+  }, [cliente.id]);
+
   const handleResetKey = async () => {
     if (!confirm("Regenerar API Key?")) return;
     const newKey = crypto.randomUUID();
@@ -85,6 +116,20 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
             <Copy size={16} />
           </Button>
         </div>
+
+        {metrics && (
+          <div className="text-xs text-muted-foreground space-y-1">
+            <p><strong>Jobs (Current Month):</strong> {metrics.total_jobs}</p>
+            <p><strong>Success:</strong> {metrics.success}</p>
+            <p><strong>Failures:</strong> {metrics.failures}</p>
+            <p><strong>Jobs (Previous Month):</strong> {metrics.total_jobs_prev_month}</p>
+            {metrics.avg_processing_time_seconds !== null && (
+              <p>
+                <strong>Avg Time:</strong> {metrics.avg_processing_time_seconds.toFixed(2)}s
+              </p>
+            )}
+          </div>
+        )}
 
         <div className="flex justify-end gap-2">
           <Button variant="outline" size="icon" onClick={onEdit}>
