@@ -3,7 +3,7 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { Metrics } from "@/app/lib/types";
+import { Metrics } from "../app/lib/types";
 import { BarChart3, AlertCircle } from "lucide-react";
 
 type Props = {
