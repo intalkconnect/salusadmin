@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Briefcase, CheckCircle, XCircle, Server, Clock } from "lucide-react";
-import { Metrics } from "../app/lib/types";
+import { Metrics } from @/app/lib/types";
 
 type Props = {
   metrics: Metrics;
