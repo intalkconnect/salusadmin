@@ -91,7 +91,7 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
       <Card className="bg-card text-card-foreground border border-border rounded-xl shadow-md">
         <CardContent className="p-4 flex flex-col gap-3">
           <div className="flex justify-between items-center">
-            <h3 className="font-semibold text-lg">{cliente.nome}</h3>
+            <h3 className="font-semibold text-lg">{cliente.id}</h3>
             <Switch
               checked={cliente.ativo}
               onCheckedChange={handleToggleStatus}
@@ -101,8 +101,7 @@ const InstanceCard = ({ cliente, refresh, onEdit }: Props) => {
 
           <div className="flex justify-between items-center">
             <div>
-              <p className="text-xs text-muted-foreground">API Key</p>
-              <p className="font-mono text-sm">{cliente.id}</p>
+              <p className="text-xs text-muted-foreground">{cliente.nome}</p>
             </div>
 <Button
   variant="ghost"
