@@ -2,7 +2,7 @@ import { getLogtoContext } from '@logto/next/server-actions';
 import { redirect } from 'next/navigation';
 import AdminPageContent from '@/app/admin/AdminPageContent';
 
-import { logtoConfig } from '@/lib/logto';
+import { logtoConfig } from './lib/logto';
 
 export default async function AdminPage() {
   const { isAuthenticated, claims } = await getLogtoContext(logtoConfig);
