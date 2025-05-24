@@ -1,6 +1,6 @@
 import { getLogtoContext } from '@logto/next';
 import { redirect } from 'next/navigation';
-import AdminPageContent from './AdminPageContent';
+import AdminPageContent from '@/app/admin/AdminPageContent';
 
 export default async function AdminPage() {
   const { isAuthenticated, getUserInfo } = getLogtoContext();
