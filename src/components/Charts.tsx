@@ -15,12 +15,12 @@ const COLORS = [
 ];
 
 const Charts = ({ metrics }: Props) => {
-  const fileData = Object.entries(metrics.por_tipo_arquivo).map(([name, value]) => ({
+  const fileData = Object.entries(metrics.by_file_type).map(([name, value]) => ({
     name,
     value,
   }));
 
-  const errorData = Object.entries(metrics.por_tipo_erro).map(([name, value]) => ({
+  const errorData = Object.entries(metrics.by_error_type).map(([name, value]) => ({
     name,
     value,
   }));
