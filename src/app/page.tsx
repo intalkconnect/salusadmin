@@ -132,7 +132,7 @@ export default function ClientesPage() {
     <h2 className="text-2xl font-semibold flex items-center gap-2">
       📊 Dashboard
     </h2>
-    <MetricsCards metrics={metrics} totalClientes={clientes.length} />
+    <MetricsCards />
     <Charts metrics={metrics} />
   </div>
 
