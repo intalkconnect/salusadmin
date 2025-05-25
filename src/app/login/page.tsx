@@ -29,14 +29,7 @@ export default function LoginPage() {
       <div className="bg-zinc-800 p-8 md:p-10 rounded-2xl shadow-2xl w-full max-w-md">
         {/* Logo e título */}
         <div className="flex flex-col items-center mb-6">
-          <Image
-            src="/logo.png" // coloque seu logo aqui
-            alt="Logo"
-            width={160}
-            height={160}
-            className="mb-2"
-          />
-          <h1 className="text-3xl font-bold text-white">Salus Dashboard</h1>
+          <h1 className="text-3xl font-bold text-white">Portal Salus</h1>
           <p className="text-zinc-400 text-sm">Acesso restrito</p>
         </div>
 
