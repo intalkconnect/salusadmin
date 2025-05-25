@@ -32,8 +32,8 @@ export default function LoginPage() {
           <Image
             src="/logo.png" // coloque seu logo aqui
             alt="Logo"
-            width={80}
-            height={80}
+            width={160}
+            height={160}
             className="mb-2"
           />
           <h1 className="text-3xl font-bold text-white">Salus Dashboard</h1>
