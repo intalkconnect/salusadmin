@@ -25,29 +25,29 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 to-indigo-600">
-      <div className="bg-white p-8 md:p-10 rounded-2xl shadow-xl w-full max-w-md">
-        {/* Logo */}
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-zinc-900 to-black">
+      <div className="bg-zinc-800 p-8 md:p-10 rounded-2xl shadow-2xl w-full max-w-md">
+        {/* Logo e título */}
         <div className="flex flex-col items-center mb-6">
           <Image
-            src="/logo.png" // coloque seu logo em /public/logo.png
+            src="/logo.png" // coloque seu logo aqui
             alt="Logo"
             width={80}
             height={80}
             className="mb-2"
           />
-          <h1 className="text-3xl font-bold text-gray-800">Salus Dashboard</h1>
-          <p className="text-gray-500 text-sm">Acesso restrito</p>
+          <h1 className="text-3xl font-bold text-white">Salus Dashboard</h1>
+          <p className="text-zinc-400 text-sm">Acesso restrito</p>
         </div>
 
         {/* Formulário */}
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-zinc-200">
               Usuário
             </label>
             <input
-              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-zinc-600 bg-zinc-900 rounded-lg px-4 py-2 w-full text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
               placeholder="Digite seu usuário"
               value={username}
@@ -57,11 +57,11 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-zinc-200">
               Senha
             </label>
             <input
-              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-zinc-600 bg-zinc-900 rounded-lg px-4 py-2 w-full text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="password"
               placeholder="Digite sua senha"
               value={password}
