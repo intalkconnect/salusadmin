@@ -17,7 +17,7 @@ export const authOptions: NextAuthOptions = {
         };
 
         const { data, error } = await supabase
-          .from('users')
+          .from('clientes')
           .select('*')
           .eq('username', username)
           .eq('password', password) // ⚠️ ATENÇÃO: Hash isso depois, não use plaintext em produção
