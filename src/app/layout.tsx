@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Salus Admin",
-  description: "Gerenciador de Instâncias SalusAPI",
+  title: "Portal Salus",
+  description: "Gerenciador Salus Project",
+  icons: {
+    icon: "/favicon.ico", // <-- Isso adiciona o favicon global
+  },
 };
 
 export default function RootLayout({
