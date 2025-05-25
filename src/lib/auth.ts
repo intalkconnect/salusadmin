@@ -1,32 +1,14 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { NextAuthOptions } from 'next-auth';
-
-const users = [
-  {
-    id: '1',
-    name: 'Admin User',
-    email: 'admin@example.com',
-    username: 'admin',
-    password: '123456',
-    role: 'admin',
-  },
-  {
-    id: '2',
-    name: 'Client User',
-    email: 'client@example.com',
-    username: 'client',
-    password: '123456',
-    role: 'client',
-  },
-];
+import { supabase } from './supabase';
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'admin' },
-        password: { label: 'Password', type: 'password', placeholder: '123456' },
+        username: { label: 'Username', type: 'text' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         const { username, password } = credentials as {
@@ -34,15 +16,24 @@ export const authOptions: NextAuthOptions = {
           password: string;
         };
 
-        if (username === 'admin' && password === '123456') {
-          return { id: '1', name: 'Admin', email: 'admin@example.com', role: 'admin' };
+        const { data, error } = await supabase
+          .from('users')
+          .select('*')
+          .eq('username', username)
+          .eq('password', password) // ⚠️ ATENÇÃO: Hash isso depois, não use plaintext em produção
+          .single();
+
+        if (error || !data) {
+          console.log('Login error:', error);
+          return null;
         }
 
-        if (username === 'client' && password === '123456') {
-          return { id: '2', name: 'Client', email: 'client@example.com', role: 'client' };
-        }
-
-        return null;
+        return {
+          id: data.id,
+          name: data.name,
+          email: data.email,
+          role: data.role,
+        };
       },
     }),
   ],
