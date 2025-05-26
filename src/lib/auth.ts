@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
           .from('clientes')
           .select('*')
           .eq('username', username)
-          .eq('password', password) // ⚠️ ATENÇÃO: Hash isso depois, não use plaintext em produção
+          .eq('password', password) // ⚠️ Importante usar hash depois!
           .single();
 
         if (error || !data) {
@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
         }
 
         return {
-          id: data.id,
+          id: data.id.toString(), // 🔥 Importante garantir que é string
           name: data.name,
           email: data.email,
           role: data.role,
@@ -40,12 +40,14 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = (user as any).role;
+        token.id = user.id;
+        token.role = user.role;
       }
       return token;
     },
     async session({ session, token }) {
-      session.user.role = token.role;
+      session.user.id = token.id as string;
+      session.user.role = token.role as string;
       return session;
     },
   },
