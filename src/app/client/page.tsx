@@ -14,7 +14,7 @@ export default async function ClientPage() {
     redirect("/"); // 🔒 Se não é cliente, manda para home
   }
 
-  const userId = session.user.id; // 🔥 Pegando o ID
+  const userId = session.user?.id; // 🔥 Pegando o ID
 
   return (
     <div className="max-w-7xl mx-auto p-6 flex flex-col gap-8 min-h-screen">
