@@ -14,7 +14,7 @@ export default async function HomePage() {
   }
 
   if (session.user?.role === 'client') {
-    redirect('/client');
+    redirect('/client?id=${session.user.id}');
   }
 
   return (
