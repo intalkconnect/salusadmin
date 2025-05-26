@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Charts from "@/components/Charts";
+import MetricsCards from "@/components/MetricsCards";
 import { Metrics } from "../lib/types";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
@@ -42,6 +43,7 @@ export default function ClientPageContent({ userId }: ClientPageContentProps) {
         <h2 className="text-2xl font-semibold flex items-center gap-2">
           📊 Dashboard
         </h2>
+        <MetricsCards metrics={metrics} totalClientes={metrics.total_jobs} />
         <Charts metrics={metrics} />
       </div>
 
