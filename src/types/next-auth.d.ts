@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+import { JWT } from "next-auth/jwt";
 
 declare module "next-auth" {
   interface Session {
@@ -7,17 +8,19 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       image?: string | null;
-      role?: string | null;  // 👈 Aqui estamos adicionando o role
+      role?: string | null;
     };
   }
 
   interface User {
-    role?: string | null;    // 👈 Também se aplica para o objeto User
+    id: string;
+    role?: string | null;
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
-    role?: string | null;    // 👈 Adiciona o role no token JWT
+    id: string;
+    role?: string | null;
   }
 }
